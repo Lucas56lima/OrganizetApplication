@@ -1,0 +1,29 @@
+﻿.kanban-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.kanban-column {
+    width: 30%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+    min-height: 200px; /* Para garantir que as colunas tenham altura mínima */
+}
+
+.kanban-card {
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    cursor: move;
+    position: relative;
+}
+
+    .kanban-card.dragging {
+        opacity: 0.5;
+    }

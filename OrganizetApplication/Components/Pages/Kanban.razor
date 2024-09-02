@@ -1,0 +1,105 @@
+﻿@page "/kanban"
+@page "/kanban/{TaskName}"
+@inject NavigationManager NavigationManager
+
+<h1>@PageTitle</h1>
+<div class="kanban-container">     
+    @foreach (var column in Columns)
+    {
+        <div class="kanban-column">
+            <h4>@column.Title</h4>
+            @foreach (var card in column.Cards)
+            {
+                <div class="kanban-card">
+                    <h5>@card.Title</h5>
+                    <p>@card.Description</p>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+<style>
+    .kanban-container {
+        display: flex;
+        overflow-x: auto;
+        padding: 20px;
+        gap: 10px;
+    }
+
+    .kanban-column {
+        flex: 1;
+        margin: 0 10px;
+        padding: 10px;
+        background-color: #f4f4f4;
+        border-radius: 8px;
+    }
+
+    .kanban-card {
+        background-color: #fdfd96; /* Cor de post-it */
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        padding: 10px;
+        margin-bottom: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+        width: 200px; /* Ajuste a largura conforme necessário */
+    }
+
+    .kanban-card h5 {
+        margin-top: 0;
+    }
+</style>
+
+@code {
+    [Parameter]
+    public string? TaskName { get; set; }
+    public string PageTitle { get; set; } = "Kanban";
+    protected override void OnParametersSet()
+    {
+        Console.WriteLine($"TaskName recebido: {TaskName}"); // Log para depuração
+        if (!string.IsNullOrEmpty(TaskName))
+        {
+            PageTitle = Uri.UnescapeDataString(TaskName);
+        }
+    }
+    private List<Column> Columns = new List<Column>
+    {
+        new Column
+        {
+            Title = "Para Fazer",
+            Cards = new List<Card>
+            {
+                new Card { Title = "Tarefa 1", Description = "Verificar fechamento e enviar os arquivos conforme padrão." },
+                new Card { Title = "Tarefa 2", Description = "Descrição da Tarefa 2" }
+            }
+        },
+        new Column
+        {
+            Title = "Em Andamento",
+            Cards = new List<Card>
+            {
+                new Card { Title = "Tarefa 3", Description = "Descrição da Tarefa 3" }
+            }
+        },
+        new Column
+        {
+            Title = "Concluído",
+            Cards = new List<Card>
+            {
+                new Card { Title = "Tarefa 4", Description = "Descrição da Tarefa 4" }
+            }
+        }
+    };
+
+    private class Column
+    {
+        public string Title { get; set; }
+        public List<Card> Cards { get; set; }
+    }
+
+    private class Card
+    {
+        public string Title { get; set; }
+        public string Description { get; set; }
+    }
+}

@@ -1,0 +1,1 @@
+C:\Users\Usuário\source\repos\Organizet\OrganizetApplication\OrganizetApplication.csproj;x64

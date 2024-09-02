@@ -1,0 +1,53 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\OrganizetApplication.styles.css",
+      "PackagePath": "staticwebassets\\OrganizetApplication.styles.css"
+    },
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\app.css",
+      "PackagePath": "staticwebassets\\css\\app.css"
+    },
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\app1.css",
+      "PackagePath": "staticwebassets\\css\\app1.css"
+    },
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
+    },
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\favicon.png",
+      "PackagePath": "staticwebassets\\favicon.png"
+    },
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\js\\dragdrop.js",
+      "PackagePath": "staticwebassets\\js\\dragdrop.js"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.OrganizetApplication.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.build.OrganizetApplication.props",
+      "PackagePath": "build\\OrganizetApplication.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.buildMultiTargeting.OrganizetApplication.props",
+      "PackagePath": "buildMultiTargeting\\OrganizetApplication.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\staticwebassets\\msbuild.buildTransitive.OrganizetApplication.props",
+      "PackagePath": "buildTransitive\\OrganizetApplication.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

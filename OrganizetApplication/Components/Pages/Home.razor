@@ -1,0 +1,127 @@
+﻿@page "/"
+@inject NavigationManager NavigationManager
+<h1>Tarefas</h1>
+
+@if (tasks == null)
+{    
+    <p><em>Loading...</em></p>
+}
+else
+{
+<div class="task-container">
+    <h4>@TasksCount</h4>
+    <table class="table table-hover" style="font-size: 12px;">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Descrição</th>
+                <th>Data de Criação</th>
+                <th>Criado por</th>
+                <th>Setor</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in tasks)
+            {
+                <tr>
+                    <td>@task.Id</td>
+                    <td>@task.Description</td>
+                    <td>@task.CreationDate</td>
+                    <td>@task.Creator</td>
+                    <td>@task.Sector</td>
+                    <td>@task.Status</td>
+                    <td>
+                        <button style="font-size: 12px;" class="btn btn-primary" @onclick="() => ViewDetails(task)">Ver Detalhes</button>
+                    </td>
+                    <td>
+                        <button style="font-size: 12px;" class="btn btn-edit" @onclick="() => ViewDetails(task)">Editar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+     </table>
+</div>
+
+<div class="task-container">
+    <h4> Tarefas em Grupo </h4>
+    <table class="table table-hover" style="font-size: 12px;">
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Descrição</th>
+                <th>Data de Criação</th>
+                <th>Criado por</th>
+                <th>Setor</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in tasks)
+            {   
+                Count = Count + 1;
+                <tr>
+                    <td>@task.Name</td>
+                    <td>@task.Description</td>
+                    <td>@task.CreationDate</td>
+                    <td>@task.Creator</td>
+                    <td>@task.Sector</td>
+                    <td>@task.Status</td>
+                    <td>
+                        <button style="font-size: 12px;" class="btn btn-primary" @onclick="() => ViewDetails(task)">Ver Detalhes</button>
+                    </td>
+                    <td>
+                        <button style="font-size: 12px;" class="btn btn-edit" @onclick="() => ViewDetails(task)">Editar</button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+     </table>
+</div>
+}
+@code {
+    private Tasks[] tasks;
+    public string TaskCount {get;set;} = "Suas Tarefas"
+    public int Count {get;set;} = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Simulate asynchronous loading to demonstrate a loading indicator
+        await Task.Delay(500);
+        
+        var summaries = new[] {"Abertura de Loja","Fechamento de Loja","Criar um aplicativo"};
+        var descriptions = new[]{"Abertura da loja São José do Rio Preto.","Fechamento da loja Jacarepaguá", "Criar um aplicativo de tarefas"};
+        var creators = new[]{"André","Igor","Lucas"};
+        var sectors = new[]{"Suporte TI","Suporte TI","Fiscal"};
+        var status = new[]{"Em Andamento","Finalizada","Em Andamento"};
+        var creationDates = new[]{"02-09-2024","28-08-2024","27-08-2024"};
+        tasks = Enumerable.Range(1, 3).Select(index => new Tasks
+        {
+            Name = summaries[Random.Shared.Next(summaries.Length)],
+            Description = descriptions[Random.Shared.Next(summaries.Length)],
+            CreationDate = creationDates[Random.Shared.Next(summaries.Length)],
+            Creator = creators[Random.Shared.Next(summaries.Length)],
+            Sector = sectors[Random.Shared.Next(summaries.Length)],
+            Status = status[Random.Shared.Next(summaries.Length)]
+        }).ToArray();
+    }
+     private void ViewDetails(Tasks task)
+    {
+        // Aqui você pode redirecionar o usuário para uma página de detalhes ou abrir um modal
+        // Exemplo de navegação:
+        var encodeName = Uri.EscapeDataString(task.Name);
+        Console.WriteLine($"Navegando para: /kanban?taskName={encodeName}"); // Log para depuração
+        NavigationManager.NavigateTo($"/kanban/{encodeName}");
+    }
+
+    private class Tasks
+    {
+        public string Name { get; set; }
+        public string Description { get; set; }
+        public string CreationDate {get; set;}
+        public string Creator { get; set; }
+        public string Sector {get; set;}
+        public string Status {get;set;}
+    }
+}
+
