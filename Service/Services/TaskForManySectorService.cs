@@ -3,13 +3,10 @@ using Domain.Interfaces;
 
 namespace Service.Services
 {
-    public class TaskForManySectorService : ITaskForManySectorService
+    public class TaskForManySectorService(ITaskForManySectorRepository repository) : ITaskForManySectorService
     {
-        private readonly ITaskForManySectorRepository _repository;
-        public TaskForManySectorService(ITaskForManySectorRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly ITaskForManySectorRepository _repository = repository;
+
         public Task<IEnumerable<TaskForManySector>> GetTaskForManySector()
         {
             throw new NotImplementedException();

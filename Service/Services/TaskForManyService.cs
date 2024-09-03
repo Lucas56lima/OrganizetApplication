@@ -3,13 +3,9 @@ using Domain.Interfaces;
 
 namespace Service.Services
 {
-    public class TaskForManyService : ITaskForManyService
+    public class TaskForManyService(ITaskForManyRepository repository) : ITaskForManyService
     {
-        private readonly ITaskForManyRepository _repository;
-        public TaskForManyService(ITaskForManyRepository repository)
-        {
-            _repository = repository;
-        }
+        private readonly ITaskForManyRepository _repository = repository;
 
         public async Task<TaskForMany> GetTaskForManyById(int idTaskForMany)
         {

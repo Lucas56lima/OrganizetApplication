@@ -8,6 +8,7 @@ namespace Domain.Interfaces
         Task<StickNoteTask> GetStickNoteTaskForStatus(string status);
         Task<StickNoteTask> GetStickNoteByTaskId(int taskId);
         Task<StickNoteTask> GetStickNoteById(int id);
+        Task<IEnumerable<StickNoteTask>> GetAllStickNote();
         Task<StickNoteTask> PutStickNoteById(int id, StickNoteTask newStickNote);
     }
 }

@@ -5,13 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class TaskForUserRepository : ITaskForUserRepository
+    public class TaskForUserRepository(OrganizetContextDb context) : ITaskForUserRepository
     {
-        private readonly OrganizetContextDb _context;
-        public TaskForUserRepository(OrganizetContextDb context)
-        {
-            _context = context;
-        }
+        private readonly OrganizetContextDb _context = context;
 
         public async Task<TaskForUser> GetTaskForUserById(int idTaskForUser)
         {

@@ -21,6 +21,8 @@ builder.Services.AddScoped<ITaskForUserRepository, TaskForUserRepository>();
 builder.Services.AddScoped<ITaskForUserService, TaskForUserService>();
 builder.Services.AddScoped<ITaskForManyRepository, TaskForManyRepository>();
 builder.Services.AddScoped<ITaskForManyService, TaskForManyService>();
+builder.Services.AddScoped<IStickNoteTaskRepository, StickNoteTaskRepository>();
+builder.Services.AddScoped<IStickNoteTaskService, StickNoteTaskService>();
 
 var app = builder.Build();
 

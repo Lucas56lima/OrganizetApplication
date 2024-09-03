@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Organizet")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ee968d13ceecaf59100bf0cbf5919363a286b6d3")]
 [assembly: System.Reflection.AssemblyProductAttribute("Organizet")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Organizet")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

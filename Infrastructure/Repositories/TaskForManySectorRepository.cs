@@ -5,13 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class TaskForManySectorRepository : ITaskForManySectorRepository
+    public class TaskForManySectorRepository(OrganizetContextDb context) : ITaskForManySectorRepository
     {
-        private readonly OrganizetContextDb _context;
-        public TaskForManySectorRepository(OrganizetContextDb context)
-        {
-            _context = context;
-        }
+        private readonly OrganizetContextDb _context = context;
 
         public async Task<TaskForManySector> GetTaskForManySectorByTaskId(int idTaskForMany)
         {

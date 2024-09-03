@@ -1,20 +1,22 @@
 ﻿@page "/kanban"
 @page "/kanban/{TaskName}"
 @inject NavigationManager NavigationManager
-
+@inject IJSRuntime JSRuntime
 <h1>@PageTitle</h1>
-<div class="kanban-container">     
+<div class="kanban-container">
     @foreach (var column in Columns)
     {
         <div class="kanban-column">
-            <h4>@column.Title</h4>
+            <h4>@column.Title</h4>            
             @foreach (var card in column.Cards)
             {
-                <div class="kanban-card">
+                <div class="kanban-card" draggable="true">
                     <h5>@card.Title</h5>
                     <p>@card.Description</p>
+                    <button type="button" class="btn btn-outline-info" style="margin: 0 auto;display:block">Iniciar</button>
                 </div>
-            }
+            }            
+           
         </div>
     }
 </div>
@@ -45,15 +47,19 @@
         width: 200px; /* Ajuste a largura conforme necessário */
     }
 
-    .kanban-card h5 {
-        margin-top: 0;
-    }
+        .kanban-card h5 {
+            margin-top: 0;
+        }
 </style>
 
 @code {
     [Parameter]
-    public string? TaskName { get; set; }
+    public string TaskName { get; set; }
     public string PageTitle { get; set; } = "Kanban";
+
+    private Card draggedCard;
+    private Column sourceColumn;
+
     protected override void OnParametersSet()
     {
         Console.WriteLine($"TaskName recebido: {TaskName}"); // Log para depuração
@@ -62,6 +68,7 @@
             PageTitle = Uri.UnescapeDataString(TaskName);
         }
     }
+
     private List<Column> Columns = new List<Column>
     {
         new Column

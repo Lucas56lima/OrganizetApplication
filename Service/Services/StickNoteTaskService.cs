@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 
 namespace Service.Services
 {
-    public class StickNoteTaskService : IStickNoteTaskService
+    public class StickNoteTaskService(IStickNoteTaskRepository repository) : IStickNoteTaskService
     {
-        private readonly IStickNoteTaskRepository _repository;
-        public StickNoteTaskService(IStickNoteTaskRepository repository)
+        private readonly IStickNoteTaskRepository _repository = repository;
+
+        public async Task<IEnumerable<StickNoteTask>> GetAllStickNote()
         {
-            _repository = repository;
+            return await _repository.GetAllStickNote();
         }
 
         public async Task<StickNoteTask> GetStickNoteById(int id)
@@ -53,7 +54,7 @@ namespace Service.Services
 
         public async Task<StickNoteTask> PutStickNoteById(int id, StickNoteTask newStickNote)
         {
-            var stickNoteTaskDb = await GetStickNoteById(id);
+            StickNoteTask stickNoteTaskDb = await GetStickNoteById(id);
             newStickNote.TaskId = id;
             return await _repository.PutStickNoteById(id, newStickNote);
         }

@@ -5,12 +5,23 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Repositories
 {
-    public class StickNoteTaskRepository : IStickNoteTaskRepository
+    public class StickNoteTaskRepository(OrganizetContextDb context) : IStickNoteTaskRepository
     {
-        private readonly OrganizetContextDb _context;
-        public StickNoteTaskRepository(OrganizetContextDb context)
+        private readonly OrganizetContextDb _context = context;
+
+        public async Task<IEnumerable<StickNoteTask>> GetAllStickNote()
         {
-            _context = context;
+            try
+            {
+                return await _context.StickNoteTasks
+                            .Where(u => u.IsActive == true)
+                            .ToListAsync();
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Erro ao acessar o banco", ex);
+            }
         }
 
         public async Task<StickNoteTask> GetStickNoteById(int id)

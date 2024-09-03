@@ -24,8 +24,12 @@
         <a class="dismiss">🗙</a>
     </div>
 
-    <script src="_framework/blazor.webview.js" autostart="false"></script>   
-
+    <script src="_framework/blazor.webview.js" autostart="false"></script>
+    <script>
+        function preventDefault(e) {
+            e.preventDefault();
+        }
+    </script>
 
 </body>
 
