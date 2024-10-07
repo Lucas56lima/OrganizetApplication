@@ -13,15 +13,18 @@ namespace OrganizetApplication
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
-
+            // Adiciona o HttpClient configurado
+            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri("https://localhost:7130/api/") });
+            builder.Services.AddSingleton<CacheService>();
             builder.Services.AddMauiBlazorWebView();
 
 #if DEBUG
-    		builder.Services.AddBlazorWebViewDeveloperTools();
-    		builder.Logging.AddDebug();
+            builder.Services.AddBlazorWebViewDeveloperTools();
+            builder.Logging.AddDebug();
 #endif
 
             return builder.Build();
         }
+
     }
 }

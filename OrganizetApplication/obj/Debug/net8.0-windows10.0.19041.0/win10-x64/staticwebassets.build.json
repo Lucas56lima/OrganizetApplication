@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Ks4XwBKUUumUzWzuXOcrosh9Rv/piiWcAPriZIp2KB4=",
+  "Hash": "g0/N2dWxJDhgyb2EUP0crr4nvt3PU9+H16Ru84wfTSE=",
   "Source": "OrganizetApplication",
   "BasePath": "/",
   "Mode": "Root",
@@ -10,17 +10,17 @@
     {
       "Name": "OrganizetApplication\\wwwroot",
       "Source": "OrganizetApplication",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
       "Pattern": "**"
     }
   ],
   "Assets": [
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\OrganizetApplication.styles.css",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\OrganizetApplication.styles.css",
       "SourceId": "OrganizetApplication",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\",
       "BasePath": "/",
       "RelativePath": "OrganizetApplication.styles.css",
       "AssetKind": "All",
@@ -33,13 +33,13 @@
       "AssetTraitValue": "ApplicationBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\OrganizetApplication.styles.css"
+      "OriginalItemSpec": "C:\\Users\\Nova pasta\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\bundle\\OrganizetApplication.styles.css"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\projectbundle\\OrganizetApplication.bundle.scp.css",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\projectbundle\\OrganizetApplication.bundle.scp.css",
       "SourceId": "OrganizetApplication",
       "SourceType": "Computed",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\projectbundle\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\projectbundle\\",
       "BasePath": "/",
       "RelativePath": "OrganizetApplication.bundle.scp.css",
       "AssetKind": "All",
@@ -52,13 +52,13 @@
       "AssetTraitValue": "ProjectBundle",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\projectbundle\\OrganizetApplication.bundle.scp.css"
+      "OriginalItemSpec": "C:\\Users\\Nova pasta\\OrganizetApplication\\obj\\Debug\\net8.0-windows10.0.19041.0\\win10-x64\\scopedcss\\projectbundle\\OrganizetApplication.bundle.scp.css"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\app.css",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\app.css",
       "SourceId": "OrganizetApplication",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/app.css",
       "AssetKind": "All",
@@ -74,10 +74,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app.css"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\app1.css",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\app1.css",
       "SourceId": "OrganizetApplication",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/app1.css",
       "AssetKind": "All",
@@ -93,10 +93,10 @@
       "OriginalItemSpec": "wwwroot\\css\\app1.css"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "SourceId": "OrganizetApplication",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css",
       "AssetKind": "All",
@@ -112,10 +112,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "SourceId": "OrganizetApplication",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "css/bootstrap/bootstrap.min.css.map",
       "AssetKind": "All",
@@ -131,10 +131,10 @@
       "OriginalItemSpec": "wwwroot\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\favicon.png",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\favicon.png",
       "SourceId": "OrganizetApplication",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "favicon.png",
       "AssetKind": "All",
@@ -150,10 +150,29 @@
       "OriginalItemSpec": "wwwroot\\favicon.png"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\index.html",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\icon_delete.png",
       "SourceId": "OrganizetApplication",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "icon_delete.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icon_delete.png"
+    },
+    {
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\index.html",
+      "SourceId": "OrganizetApplication",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
       "RelativePath": "index.html",
       "AssetKind": "All",
@@ -169,12 +188,12 @@
       "OriginalItemSpec": "wwwroot\\index.html"
     },
     {
-      "Identity": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\js\\dragdrop.js",
+      "Identity": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\js\\site.js",
       "SourceId": "OrganizetApplication",
       "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\",
+      "ContentRoot": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\",
       "BasePath": "/",
-      "RelativePath": "js/dragdrop.js",
+      "RelativePath": "js/site.js",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -185,7 +204,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\js\\dragdrop.js"
+      "OriginalItemSpec": "wwwroot\\js\\site.js"
     }
   ]
 }

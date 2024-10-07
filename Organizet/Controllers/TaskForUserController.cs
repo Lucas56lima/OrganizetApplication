@@ -35,5 +35,11 @@ namespace Organizet.Controllers
         {
             return Ok(await _service.GetTaskForUserByTitle(titleTaskForUser));
         }
+
+        [HttpGet("GetTasksForUserCompleted")]
+        public async Task<IActionResult> GetTasksForUserCompleted(DateOnly initalDate, DateOnly endDate)
+        {
+            return Ok(await _service.GetTasksForUserCompleted(initalDate, endDate));
+        }
     }
 }

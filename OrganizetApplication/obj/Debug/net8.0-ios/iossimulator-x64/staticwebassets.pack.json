@@ -1,32 +1,40 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\obj\\Debug\\net8.0-ios\\iossimulator-x64\\scopedcss\\bundle\\OrganizetApplication.styles.css",
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\obj\\Debug\\net8.0-ios\\iossimulator-x64\\scopedcss\\bundle\\OrganizetApplication.styles.css",
       "PackagePath": "staticwebassets\\OrganizetApplication.styles.css"
     },
     {
-      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\app.css",
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\app.css",
       "PackagePath": "staticwebassets\\css\\app.css"
     },
     {
-      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\app1.css",
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\app1.css",
       "PackagePath": "staticwebassets\\css\\app1.css"
     },
     {
-      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\css\\bootstrap\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\favicon.png",
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\favicon.png",
       "PackagePath": "staticwebassets\\favicon.png"
     },
     {
-      "Id": "C:\\Users\\Usuário\\source\\repos\\Organizet\\OrganizetApplication\\wwwroot\\index.html",
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\icon_delete.png",
+      "PackagePath": "staticwebassets\\icon_delete.png"
+    },
+    {
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "C:\\Users\\Nova pasta\\OrganizetApplication\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
       "Id": "obj\\Debug\\net8.0-ios\\iossimulator-x64\\staticwebassets\\msbuild.OrganizetApplication.Microsoft.AspNetCore.StaticWebAssets.props",

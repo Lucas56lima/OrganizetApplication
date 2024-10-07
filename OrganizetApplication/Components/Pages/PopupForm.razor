@@ -1,12 +1,17 @@
-﻿<h3>PopupForm</h3>
-
+﻿@using System.Diagnostics
+@using Domain.Entities
+@using Microsoft.Extensions.Logging
+@using OrganizetApplication.Services
+@using Microsoft.AspNetCore.SignalR.Client
+@using System.Diagnostics.Tracing
+@inject NavigationManager Navigation
+@inject HttpClient httpClient
 @code {
     [Parameter]
     public bool IsVisible { get; set; }
-
     [Parameter]
     public EventCallback<bool> IsVisibleChanged { get; set; }
-
+    private bool isLoading = false;
     private async Task ClosePopup()
     {
         IsVisible = false;
@@ -18,39 +23,328 @@
 {
     <div class="popup-overlay" @onclick="ClosePopup">
         <div class="popup-content" @onclick:stopPropagation="true">
-            <button class="close-btn" @onclick="ClosePopup">&times;</button>
-            <h2>Formulário</h2>
-            <EditForm Model="formModel" OnValidSubmit="HandleSubmit">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+            <h2 id="title">@titlePage</h2>
 
-                <label for="name">Nome:</label>
-                <InputText id="name" @bind-Value="formModel.Name" required /><br><br>
+            <!-- Exibir o spinner de carregamento se isLoading for verdadeiro -->
+            @if (isLoading)
+            {                
+                <div class="loading-spinner-container" style="--spinner-height:20vh">
+                    <div class="loading-spinner"></div>
+                </div>                            
+            }
+            else if (taskCreated)
+            {
+                <div>
+                    <p>@notificationMessage</p>
+                </div>
+            }
+            else
+            {
+                <EditForm Model="taskForMany" OnValidSubmit="SubmitForm">
+                    <!-- Corrigido aqui -->
+                    <DataAnnotationsValidator />
+                    <ValidationSummary />
 
-                <label for="email">E-mail:</label>
-                <InputText id="email" type="email" @bind-Value="formModel.Email" required /><br><br>
+                    <!-- Botão de fechamento dentro do formulário -->
+                    <button type="button" class="close-btn" @onclick="ClosePopup">&times;</button>
 
-                <button type="submit">Enviar</button>
-            </EditForm>
+                    <!-- Dropdown de seleção de tipo de tarefa -->
+                    <select @bind="selectedItem" required>
+                        @foreach (var item in items)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select><br><br>
+
+                    <!-- Campo de Título -->
+                    <label for="title">Título: </label><br />
+                    <InputText id="title" @bind-Value="taskForMany.Title" required /><br><br>
+
+                    <label for="description">Descrição: </label><br />
+                    <InputText id="description" @bind-Value="taskForMany.Description" /><br><br>
+
+                    <!-- Checkboxes para Setores -->
+                    @if (selectedItem == "Em Grupo")
+                    {
+                        <label for="sector">Setor:</label> <br />
+                        @foreach (var sector in sectors)
+                        {
+                            <div class="sectors-content">
+                                <InputCheckbox @bind-Value="sector.IsSelected" />
+                                <label>@sector.Name</label>
+                            </div>
+                        }
+                    }
+                    <br/>
+                    <button type="submit" class="btn btn-primary" style="margin: 20px">Enviar</button>
+                </EditForm>
+            }
         </div>
-    </div>
+    </div>   
 }
 
 @code {
-    private FormModel formModel = new FormModel();
+    public TaskForMany taskForMany = new TaskForMany();
+    public TaskForUser taskForUser = new TaskForUser();        
+    public string titlePage;    
+    public TaskForManySector taskForManySector = new TaskForManySector();
+    private List<string> items = new List<string> {" ","Para Mim", "Em Grupo" };
+    private string selectedItem;
+    private bool taskCreated = false;
+    private string notificationMessage;
+    private bool showNotificator = false;    
+    private IEnumerable<Sector> sectors = new List<Sector>();
+    [Inject] private ILogger<PopupForm> _logger { get; set; }
 
-    private void HandleSubmit()
+    protected override async Task OnInitializedAsync()
     {
-        // Lógica para lidar com o envio do formulário
-        // Exemplo: salvar os dados ou enviar uma solicitação
-        Console.WriteLine($"Nome: {formModel.Name}, Email: {formModel.Email}");
-        ClosePopup(); // Fechar o popup após o envio
+        titlePage = "Criar Tarefa";
+        await LoadSectors();
     }
 
-    public class FormModel
+    private async Task HandleSubmit()
     {
-        public string Name { get; set; }
-        public string Email { get; set; }
+
+        await ClosePopup(); // Fechar o popup após o envio
+    }
+
+    private void CloseNotificator()
+    {
+        showNotificator = false;
+    }
+
+    private async Task SubmitForm()
+    {
+        isLoading = true; // Inicia o carregamento (exibe o spinner)
+        taskCreated = false; // Garante que a mensagem de sucesso não apareça ainda
+        titlePage = "";
+        StateHasChanged(); // Força a atualização da interface
+
+        try
+        {
+            if (selectedItem == "Em Grupo")
+            {
+                await PostNewTaskForMany(taskForMany);
+            }
+            else if (selectedItem == "Para Mim")
+            {
+                taskForUser.Title = taskForMany.Title;
+                await PostNewTaskForUser(taskForUser);                
+            }
+
+            taskCreated = true;
+            
+        }
+        catch (Exception ex)
+        {
+            // Aqui você pode adicionar o tratamento de erros
+            Console.WriteLine($"Erro ao criar tarefa: {ex.Message}");
+        }
+        finally
+        {
+            await Task.Delay(1000); // Simulação de tempo para o spinner
+            isLoading = false; // Finaliza o carregamento (oculta o spinner)
+             // Atualiza a interface para refletir o novo estado
+
+            if (taskCreated)
+            {
+                // Exibe a mensagem de sucesso por alguns segundos
+                await Task.Delay(1000); // Aguarda mais 2 segundos para a mensagem
+            }
+
+            await ClosePopup();
+            StateHasChanged();            
+        }
+    }
+
+
+
+    public async Task PostNewTaskForMany(TaskForMany taskForMany)
+    {
+        try
+        {           
+            var selectedItems = sectors.Where(s => s.IsSelected).Select(s => s.Id).ToList();
+
+            // Preparar o objeto para enviar na requisição
+            var response = await httpClient.PostAsJsonAsync("TaskForMany/RegisterNewTaskForMany", taskForMany);
+
+            if (response.IsSuccessStatusCode)
+            {
+                // Ler a resposta e deserializar o objeto TaskForMany
+                var createdTask = await response.Content.ReadFromJsonAsync<TaskForMany>();                
+                if (createdTask != null)
+                {
+                    // Atualizar o objeto taskForMany com o ID retornado
+                    taskForMany.Id = createdTask.Id;
+
+                    // Postar setores relacionados
+                    await PostTaskForManySectors(taskForMany, selectedItems);
+                    titlePage = "Criando Tarefa";                    
+                }
+                else
+                {
+                    _logger.LogInformation("Erro: Tarefa criada não retornou um ID válido.");
+                }
+            }
+            else
+            {
+                _logger.LogInformation($"Erro ao criar a tarefa. Código de status: {response.StatusCode}");
+            }
+        }
+        catch (Exception ex)
+        {
+            var errorMessage = $"Erro ao fazer POST: {ex.Message}";
+            _logger.LogInformation($"Erro {errorMessage}");
+        }
+    }
+
+
+
+    private async Task PostTaskForManySectors(TaskForMany taskForMany, List<int> selectedItems)
+    {
+        if (taskForMany == null)
+        {
+            _logger.LogInformation("Tarefa para muitos não pode ser nula.");
+            return;
+        }
+
+        // Conectar-se ao endpoint de notificações SSE
+        var cts = new CancellationTokenSource();
+        try
+        {
+            using var sseResponse = await httpClient.GetAsync("Notifications/events", HttpCompletionOption.ResponseHeadersRead, cts.Token);
+            sseResponse.EnsureSuccessStatusCode();
+
+            using var stream = await sseResponse.Content.ReadAsStreamAsync();
+            using var reader = new StreamReader(stream);
+
+            // Iniciar a leitura do stream em uma tarefa separada
+            _ = Task.Run(async () =>
+            {
+                while (!cts.Token.IsCancellationRequested)
+                {
+                    var line = await reader.ReadLineAsync();
+                    if (line != null && line.StartsWith("data: "))
+                    {
+                        // Extraia a mensagem da linha
+                        notificationMessage = $"{line.Substring("data: ".Length)}";
+                        // Aqui você pode armazenar ou processar a mensagem conforme necessário
+                        Debug.WriteLine($"Notificação recebida: {notificationMessage}");
+                    }
+                }
+            });
+
+            foreach (int item in selectedItems)
+            {
+                try
+                {
+                    taskForManySector.TaskId = taskForMany.Id;
+                    taskForManySector.SectorId = item;
+                    taskForManySector.Status = 1;
+
+                    var response = await httpClient.PostAsJsonAsync("TaskForManySectors/RegisterNewTaskForManySector", taskForManySector);
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var resultForSector = await response.Content.ReadAsStringAsync();
+                        Debug.WriteLine($"Setor associado com sucesso: {resultForSector}");
+                    }
+                    else
+                    {
+                        _logger.LogInformation($"Erro ao associar o setor {item}. Código de status: {response.StatusCode}");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogInformation($"Erro ao associar o setor {item}: {ex.Message}");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            _logger.LogInformation($"Erro ao se conectar ao endpoint SSE: {ex.Message}");
+        }
+        finally
+        {
+            // Cancela a tarefa de leitura quando o método é finalizado
+            cts.Cancel();
+            cts.Dispose();
+        }
+    }
+
+
+    
+    public async Task PostNewTaskForUser(TaskForUser taskForUser)
+    {
+        try
+        {
+                       
+            taskForUser.CreatorUserId = 1;
+            taskForUser.Status = 1;
+
+            var response = await httpClient.PostAsJsonAsync("TaskForUser/RegisterNewTaskForUser", taskForUser);
+
+            if (response.IsSuccessStatusCode)
+            {                
+                Debug.WriteLine($"{response.IsSuccessStatusCode}");
+                StateHasChanged();
+            }
+
+        }
+        catch (Exception ex)
+        {
+            var errorMessage = $"Erro ao fazer POST: {ex.Message}";
+            _logger.LogInformation($"Erro {errorMessage}");
+        }
+    }
+
+    public async Task LoadSectors()
+    {
+        try
+        {
+            sectors = await httpClient.GetFromJsonAsync<IEnumerable<Sector>>("Sector/GetAllSectors");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao fazer GET: {ex.Message}");
+            sectors = Enumerable.Empty<Sector>();
+        }
+    }
+
+
+
+    public async Task<TaskForMany> LoadTaskForManyById(int id)
+    {
+        var taskForManyById = await httpClient.GetFromJsonAsync<TaskForMany>($"TaskForMany/GetTaskForManyById?idTaskForMany={id}");
+        if (taskForManyById != null)
+        {
+            StateHasChanged();            
+            taskForMany.Title = taskForManyById.Title;
+            return taskForManyById;
+        }
+        else
+        {
+            throw new Exception("Failed to load task");
+        }        
+    }
+
+    public async Task<IEnumerable<TaskForMany>> LoadTaskForManySectorById(int id)
+    {
+        var taskForManyById = await httpClient.GetFromJsonAsync<IEnumerable<TaskForMany>>($"TaskForManysector/GetTaskForManySectorById?idTask={id}");
+        if (taskForManyById != null)
+        {            
+            return taskForManyById;
+        }
+        else
+        {
+            throw new Exception("Failed to load task");
+        }
+    }
+       
+    public class Sector
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }        
+        public bool IsSelected { get; set; } = false;
     }
 }
-

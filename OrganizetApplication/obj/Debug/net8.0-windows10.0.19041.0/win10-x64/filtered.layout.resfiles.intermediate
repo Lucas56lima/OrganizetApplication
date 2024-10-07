@@ -52,6 +52,11 @@ dotnet_bot.scale-125.png
 dotnet_bot.scale-150.png
 dotnet_bot.scale-200.png
 dotnet_bot.scale-400.png
+profile_icon.scale-100.png
+profile_icon.scale-125.png
+profile_icon.scale-150.png
+profile_icon.scale-200.png
+profile_icon.scale-400.png
 splashSplashScreen.scale-100.png
 splashSplashScreen.scale-125.png
 splashSplashScreen.scale-150.png
@@ -65,5 +70,6 @@ wwwroot\css\app1.css
 wwwroot\css\bootstrap\bootstrap.min.css
 wwwroot\css\bootstrap\bootstrap.min.css.map
 wwwroot\favicon.png
+wwwroot\icon_delete.png
 wwwroot\index.html
-wwwroot\js\dragdrop.js
+wwwroot\js\site.js

@@ -1,14 +1,18 @@
 ﻿using Domain.Entities;
+using Domain.Models;
 
 namespace Domain.Interfaces
 {
     public interface IStickNoteTaskRepository
     {
-        Task<StickNoteTask> PostStickNoteTask(StickNoteTask stickNoteTask);
-        Task<StickNoteTask> GetStickNoteTaskForStatus(string status);
-        Task<StickNoteTask> GetStickNoteByTaskId(int taskId);
-        Task<StickNoteTask> GetStickNoteById(int id);
-        Task<IEnumerable<StickNoteTask>> GetAllStickNote();
-        Task<StickNoteTask> PutStickNoteById(int id, StickNoteTask newStickNote);
+        Task<StickNoteTaskForMany> PostStickNoteTask(StickNoteTaskForMany stickNoteTask);
+        Task<IEnumerable<StickNoteViewModel>> GetStickNoteTaskForStatus(int taskId, string status);
+        Task<IEnumerable<StickNoteTaskForMany>> GetStickNoteTaskForStatusAndSector(int taskId, string status, int sectorId);
+        Task<IEnumerable<StickNoteViewModel>> GetStickNoteByTaskId(int taskId);
+        Task<StickNoteTaskForMany> GetStickNoteById(int id);
+        Task<IEnumerable<StickNoteTaskForMany>> GetAllStickNote();
+        Task<StickNoteTaskForMany> PutStickNoteById(int id, StickNoteTaskForMany newStickNote);
+        Task<StickNoteTaskForUserBackUp> PostStickNoteTaskForUser(StickNoteTaskForUserBackUp stickNoteTaskForUser);
+        Task<StickNoteTaskForUserBackUp> PutStickNoteByIdForUser(int sitckNoteId, StickNoteTaskForUserBackUp newStickNoteForUser);
     }
 }

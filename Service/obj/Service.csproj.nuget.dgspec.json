@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuário\\source\\repos\\Organizet\\Service\\Service.csproj": {}
+    "C:\\Users\\Nova pasta\\Service\\Service.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj": {
+    "C:\\Users\\Nova pasta\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Nova pasta\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\Nova pasta\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\Nova pasta\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite.Core": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -59,6 +63,18 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.16, )"
+            },
+            "sqlite-net-sqlcipher": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
@@ -81,14 +97,14 @@
         }
       }
     },
-    "C:\\Users\\Usuário\\source\\repos\\Organizet\\Infrastructure\\Infrastructure.csproj": {
+    "C:\\Users\\Nova pasta\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Nova pasta\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Nova pasta\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Nova pasta\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -110,8 +126,8 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj"
+              "C:\\Users\\Nova pasta\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Nova pasta\\Domain\\Domain.csproj"
               }
             }
           }
@@ -131,6 +147,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite.Core": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -138,12 +158,24 @@
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
               "target": "Package",
               "version": "[8.0.8, )"
             },
             "SQLitePCLRaw.bundle_e_sqlite3": {
               "target": "Package",
-              "version": "[2.1.9, )"
+              "version": "[2.1.10, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.16, )"
+            },
+            "sqlite-net-sqlcipher": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [
@@ -166,14 +198,14 @@
         }
       }
     },
-    "C:\\Users\\Usuário\\source\\repos\\Organizet\\Service\\Service.csproj": {
+    "C:\\Users\\Nova pasta\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Service\\Service.csproj",
+        "projectUniqueName": "C:\\Users\\Nova pasta\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Service\\Service.csproj",
+        "projectPath": "C:\\Users\\Nova pasta\\Service\\Service.csproj",
         "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Service\\obj\\",
+        "outputPath": "C:\\Users\\Nova pasta\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -195,11 +227,11 @@
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj"
+              "C:\\Users\\Nova pasta\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Nova pasta\\Domain\\Domain.csproj"
               },
-              "C:\\Users\\Usuário\\source\\repos\\Organizet\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Infrastructure\\Infrastructure.csproj"
+              "C:\\Users\\Nova pasta\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Nova pasta\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -219,6 +251,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite.Core": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -228,6 +264,18 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.16, )"
+            },
+            "sqlite-net-sqlcipher": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [

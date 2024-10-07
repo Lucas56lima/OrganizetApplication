@@ -1,0 +1,460 @@
+﻿@page "/completed"
+@using Domain.Entities
+@using Domain.Models
+@using System.Collections.Concurrent
+@using static CacheService
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject HttpClient httpClient
+@inject CacheService _cache
+
+
+<PopupForm IsVisible="@showPopup" IsVisibleChanged="ClosePopup" @ref="popupForm" />
+
+@if (tasks == null)
+{
+    <div class="loading-spinner-container">
+        <div class="loading-spinner"></div>
+    </div>
+}
+else
+{
+    <div class="task-container" style="border-bottom: groove; padding: 10px;">
+        <div class="buttonsactions-content">
+            <button @onclick="OpenPopup" class="btn btn-link p-0">
+                <i class="fas fa-plus"> Nova Tarefa</i>
+            </button>
+        </div> <br />
+        <h4>@TaskCount</h4>
+        <table class="table table-hover" style="font-size: 12px; margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Descrição</th>
+                    <th>Data de Criação</th>
+                    <th>Criado por</th>
+                    <th>Setor</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in tasksForUserPaged)
+                {
+                    <tr @ondblclick="()=> ViewDetails(task,true)">
+                        <td>@task.Id</td>
+                        <td>
+                            @if (isEditingTaskId == task.Id)
+                            {
+                                <input type="text" @bind-value="task.Title" @bind-value:event="oninput" @onblur="() => SaveTask(task.Id,task.Title)" />
+                            }
+                            else
+                            {
+                                @task.Title
+                            }
+                        </td>
+                        <td>@task.CreateDate</td>
+                        <td>@task.CreatorUserId</td>
+                        <td>@task.Sector</td>
+                        <td>@task.Status</td>
+                        <td>
+                            @if (isEditingTaskId == task.Id)
+                            {
+                                <button class="btn btn-success btn-sm" @onclick="() => SaveTask(task.Id,task.Title)" title="Salvar">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" @onclick="CancelEdit" title="Cancelar">
+                                    <i class="fas fa-close"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-info btn-sm" @onclick="() => ViewDetails(task,true)" title="Detalhar">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" @onclick="() => EditTask(task)" title="Editar">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination" style="align-items:center">
+            <p style="margin: 0 5px 0 0;">Páginas:</p>            
+            @if (!isFirstPageForUser)
+            {
+                <button class="btn btn-link p-0" @onclick="PreviousPage">Anterior</button>
+            }
+
+            @if (!isLastPageForUser)
+            {
+                <button class="btn btn-link p-0" @onclick="NextPage">Próximo</button>
+            }
+
+        </div>
+    </div>
+
+    <div class="task-container" style="border-bottom: groove; padding: 10px;">
+        <h4>@TaskForManyCount</h4>
+        <table class="table table-hover" style="font-size: 12px; margin-top: 10px;">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Descrição</th>
+                    <th>Data de Criação</th>
+                    <th>Criado por</th>
+                    <th>Setor</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var task in tasksForManyPaged)
+                {
+                    <tr @ondblclick="()=> ViewDetails(task,false)">
+                        <td>@task.Id</td>
+                        <td>
+                            @if (isEditingTaskForManyId == task.Id)
+                            {
+                                <input type="text" @bind-value="task.Title" />
+                            }
+                            else
+                            {
+                                @task.Title
+                            }
+                        </td>
+                        <td>@task.CreateDate</td>
+                        <td>@task.CreatorUserId</td>
+                        <td>@task.Sector</td>
+                        <td>@task.Status</td>
+                        <td>
+                            @if (isEditingTaskForManyId == task.Id)
+                            {
+                                <button class="btn btn-success btn-sm" @onclick="() => SaveTaskForMany(task.Id,task.Title)" title="Salvar">
+                                    <i class="fas fa-check"></i>
+                                </button>
+                                <button class="btn btn-danger btn-sm" @onclick="CancelEditForMany" title="Cancelar">
+                                    <i class="fas fa-close"></i>
+                                </button>
+                            }
+                            else
+                            {
+                                <button class="btn btn-outline-info btn-sm" @onclick="() => ViewDetails(task,false)" title="Detalhar">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                                <button class="btn btn-outline-secondary btn-sm" @onclick="() => EditTaskForMany(task)" title="Editar">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="pagination" style="align-items:center">
+
+            <p style="margin: 0 5px 0 0;">Páginas:</p>           
+            @if (!isFirstPageForMany)
+            {
+                <button class="btn btn-link p-0" @onclick="PreviousPageForMany">Anterior</button>
+            }
+            @if (!isFirstPageForMany)
+            {
+                <button class="btn btn-link p-0" @onclick="NextPageForMany">Próximo</button>
+            }
+
+        </div>
+    </div>
+}
+
+@code {
+    public string TaskCount { get; set; }
+    public string TaskForManyCount { get; set; }
+    private bool showPopup = false;
+    private PopupForm popupForm;
+    private IEnumerable<TaskViewModel> tasks;
+    private IEnumerable<TaskViewModel> tasksForMany;
+    private int currentPage = 1;
+    private int currentPageForMany = 1;
+    private int pageSize = 10;
+    private int totalPagesForUser => (int)Math.Ceiling(tasks.Count() / (double)pageSize);
+    private int totalPagesForMany => (int)Math.Ceiling(tasksForMany.Count() / (double)pageSize);
+    private bool isFirstPageForUser => currentPage == 1;
+    private bool isLastPageForUser => currentPage == totalPagesForUser;
+    private bool isFirstPageForMany => currentPageForMany == 1;
+    private bool isLastPageForMany => currentPageForMany == totalPagesForMany;
+    private int? isEditingTaskId = null;
+    private int? isEditingTaskForManyId = null;
+
+    private void OpenPopup()
+    {
+        showPopup = true;
+    }
+
+    private IEnumerable<TaskViewModel> tasksForUserPaged => tasks
+        .Skip((currentPage - 1) * pageSize)
+        .Take(pageSize);
+
+    private IEnumerable<TaskViewModel> tasksForManyPaged => tasksForMany
+        .Skip((currentPageForMany - 1) * pageSize)
+        .Take(pageSize);    
+
+    private void PreviousPage()
+    {
+        if (currentPage > 1)
+        {
+            currentPage--;
+        }
+    }
+
+    private void NextPage()
+    {
+        if (currentPage < totalPagesForUser)
+        {
+            currentPage++;
+        }
+    }
+
+    private void PreviousPageForMany()
+    {
+        if (currentPageForMany > 1)
+        {
+            currentPageForMany--;
+        }
+    }
+
+    private void NextPageForMany()
+    {
+        if (currentPageForMany < totalPagesForMany)
+        {
+            currentPageForMany++;
+        }
+    }
+
+    private void OnPopupFormCreated(PopupForm popup)
+    {
+        popupForm = popup;
+    }
+
+    private void ClosePopup(bool isVisible)
+    {
+        showPopup = isVisible;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadTasksForUsers();
+        await LoadTasksForManyCompleted(1);
+    }
+
+    private async Task LoadTasksForUsers()
+    {
+        try
+        {           
+            var endDate = DateTime.Now.Date; // Data de hoje sem hora
+            var initialDate = endDate.AddDays(-7); // 7 dias antes de hoje, sem hora
+
+            // Verifica se o item está em cache
+            
+            // Faz a chamada HTTP para buscar as tarefas
+            tasks = await httpClient.GetFromJsonAsync<IEnumerable<TaskViewModel>>($"TaskForUser/GetTasksForUserCompleted?initialDate={initialDate:yyyy-MM-dd}&endDate={endDate:yyyy-MM-dd}");
+
+            // Verifica se as tarefas foram retornadas
+            if (tasks == null || !tasks.Any())
+            {
+                TaskCount = $"Tarefas em Grupo Concluídas (0)";
+            }
+            else
+            {
+                TaskCount = $"Tarefas em Grupo Concluídas ({tasks.Count()})";
+            }
+                       
+        }
+        catch (Exception ex)
+        {
+            // Logging de erro mais robusto
+            Console.WriteLine($"Erro ao fazer GET: {ex.Message}");
+            tasks = Enumerable.Empty<TaskViewModel>();
+            TaskCount = $"Tarefas em Grupo Concluídas (0)";
+        }
+    }
+
+    private async Task LoadTasksForManyCompleted(int sectorId)
+    {
+        try
+        {
+            string cacheKey = $"SectorId: {sectorId}";
+            var currentTime = DateTime.UtcNow; // Para gerenciamento de cache
+            var endDate = DateTime.Now.Date; // Data de hoje sem hora
+            var initialDate = endDate.AddDays(-7); // 7 dias antes de hoje, sem hora
+
+            // Verifica se o item está em cache
+            if (_cache.TryGetCachedItem(cacheKey, out var cachedItem) && cachedItem.Expiration > currentTime)
+            {
+                tasksForMany = cachedItem.Data;
+                TaskForManyCount = $"Tarefas em Grupo Concluídas ({tasksForMany.Count()})";
+                return; // Retorna se o cache for válido
+            }
+
+            // Faz a chamada HTTP para buscar as tarefas
+            tasksForMany = await httpClient.GetFromJsonAsync<IEnumerable<TaskViewModel>>($"TaskForManySectors/GetTasksForManySectorCompleted?sectorId={sectorId}&initialDate={initialDate:yyyy-MM-dd}&endDate={endDate:yyyy-MM-dd}");
+
+            // Verifica se as tarefas foram retornadas
+            if (tasksForMany == null || !tasksForMany.Any())
+            {
+                TaskForManyCount = $"Tarefas em Grupo Concluídas (0)";
+            }
+            else
+            {
+                TaskForManyCount = $"Tarefas em Grupo Concluídas ({tasksForMany.Count()})";
+            }
+
+            // Adiciona ou atualiza o cache com as novas tarefas
+            _cache.AddOrUpdateCache(cacheKey, new CacheItem<IEnumerable<TaskViewModel>>
+                {
+                    Data = tasksForMany,
+                    Expiration = currentTime.AddMinutes(10) // Define a expiração do cache, por exemplo, 10 minutos
+                });
+        }
+        catch (Exception ex)
+        {
+            // Logging de erro mais robusto
+            Console.WriteLine($"Erro ao fazer GET: {ex.Message}");
+            tasksForMany = Enumerable.Empty<TaskViewModel>();
+            TaskForManyCount = $"Tarefas em Grupo Concluídas (0)";
+         }            
+    }
+
+
+
+
+
+    public IEnumerable<TaskViewModel> FilterDataFromCache(int taskId, Func<TaskViewModel, bool> filterPredicate = null)
+    {
+        string cacheKey = $"{taskId}";
+
+        if (_cache.TryGetCachedItem(cacheKey, out var cachedItem))
+        {
+            // Se um filtro for fornecido, aplique-o
+            return filterPredicate != null
+                ? cachedItem.Data.Where(filterPredicate).ToList()
+                : cachedItem.Data.ToList();
+        }
+
+        // Caso o cache não tenha nada, retorna uma coleção vazia
+        return Enumerable.Empty<TaskViewModel>();
+    }
+
+
+    private void ViewDetails(TaskViewModel task, bool isUser)
+    {
+        if (isEditingTaskForManyId == null)
+        {
+            var encodeName = Uri.EscapeDataString(task.Title);
+            NavigationManager.NavigateTo($"/kanban/{task.Id}/{encodeName}/{isUser}");
+        }
+
+    }
+
+    private void EditTask(TaskViewModel task)
+    {
+        isEditingTaskId = task.Id;
+    }
+
+    private async Task SaveTask(int id, string newTitle)
+    {
+        var task = FindTaskForUserById(id);
+        if (task == null) return;
+
+        TaskForUser newTaskForUser = new TaskForUser
+            {
+                Id = task.Id,
+                Title = newTitle,
+                SectorId = task.SectorId,
+                CreateDate = task.CreateDate,
+                CreatorUserId = task.CreatorUserId
+            };
+
+        var response = await httpClient.PutAsJsonAsync($"TaskForUser/UpdateTaskForUser/{task.Id}", task);
+
+        if (response.IsSuccessStatusCode)
+        {
+            await LoadTasksForUsers();
+            isEditingTaskId = null;
+        }
+    }
+
+    private void CancelEdit()
+    {
+        isEditingTaskId = null;
+    }
+    private void CancelEditForMany()
+    {
+        isEditingTaskForManyId = null;
+    }
+
+    private void ViewDetailsForMany(TaskViewModel task, bool isUser) // Corrigido o tipo para TaskForManyViewModel
+    {
+        if (isEditingTaskForManyId == null)
+        {
+            var encodeName = Uri.EscapeDataString(task.Title);
+            NavigationManager.NavigateTo($"/kanban/{task.Id}/{encodeName}/{isUser}");
+        }
+
+    }
+
+    private void EditTaskForMany(TaskViewModel taskForMany) // Corrigido o tipo para TaskForManyViewModel
+    {
+        isEditingTaskForManyId = taskForMany.Id;
+    }
+
+    private async Task SaveTaskForMany(int id, string newTitle) // Corrigido o tipo para TaskForManyViewModel
+    {
+
+        var taskForManyDb = FindStickNoteById(id);
+        if (taskForManyDb == null)
+        {
+            Console.WriteLine($"Tarefa com ID {id} não encontrada.");
+            return; // Ou trate o erro de forma apropriada
+        }
+
+        TaskForMany newTaskForMany = new TaskForMany
+            {
+                Id = taskForManyDb.Id,
+                Title = newTitle,
+                CreateDate = taskForManyDb.CreateDate,
+                CreatorUserId = taskForManyDb.CreatorUserId,
+                IsActive = true
+            };
+
+        var response = await httpClient.PutAsJsonAsync($"TaskForMany/PutTaskForManyByIdAndSector?id={id}", newTaskForMany);
+
+        if (response.IsSuccessStatusCode)
+        {
+            string cacheKey = $"SectorId: {taskForManyDb.Id}";
+            _cache.ClearCache(cacheKey);
+            await LoadTasksForManyCompleted(1);
+            isEditingTaskForManyId = null;
+        }
+        else
+        {
+            var errorMessage = await response.Content.ReadAsStringAsync();
+            Console.WriteLine($"Erro ao salvar a tarefa: {response.StatusCode}, {errorMessage}");
+        }
+    }
+
+    private TaskViewModel FindStickNoteById(int id)
+    {
+        return tasksForMany.FirstOrDefault(u => u.Id == id);
+    }
+
+    private TaskViewModel FindTaskForUserById(int id)
+    {
+        return tasks.FirstOrDefault(u => u.Id == id);
+    }
+
+
+}
+

@@ -1,5 +1,138 @@
 [
   {
+    "ContainingType": "Organizet.Controllers.NotificationsController",
+    "Method": "Events",
+    "RelativePath": "api/Notifications/events",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "clientId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.Void",
+        "MediaTypes": [],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Organizet.Controllers.NotificationsController",
+    "Method": "GetNotificationById",
+    "RelativePath": "api/Notifications/GetNotificationById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.NotificationsController",
+    "Method": "GetNotificationBySectorId",
+    "RelativePath": "api/Notifications/GetNotificationBySectorId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.NotificationsController",
+    "Method": "PutNotificationById",
+    "RelativePath": "api/Notifications/PutNotificationById",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "notification",
+        "Type": "Domain.Entities.Notification",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.NotificationsController",
+    "Method": "PostNotificationAsync",
+    "RelativePath": "api/Notifications/RegisterNotification",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "notification",
+        "Type": "Domain.Entities.Notification",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.SectorController",
+    "Method": "GetAllSectors",
+    "RelativePath": "api/Sector/GetAllSectors",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.SectorController",
+    "Method": "GetSectorById",
+    "RelativePath": "api/Sector/GetSectorById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.SectorController",
+    "Method": "GetSectorByName",
+    "RelativePath": "api/Sector/GetSectorByName",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "name",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "Organizet.Controllers.StickNoteTaskController",
     "Method": "GetAllStickNoteTask",
     "RelativePath": "api/StickNoteTask/GetAllStickNotes",
@@ -11,8 +144,24 @@
   },
   {
     "ContainingType": "Organizet.Controllers.StickNoteTaskController",
+    "Method": "GetStickNoteById",
+    "RelativePath": "api/StickNoteTask/GetStickNoteById",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.StickNoteTaskController",
     "Method": "GetStickNoteByTaskId",
-    "RelativePath": "api/StickNoteTask/GetStickNotesTasksById",
+    "RelativePath": "api/StickNoteTask/GetStickNoteByTaskId",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -34,8 +183,39 @@
     "Order": 0,
     "Parameters": [
       {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
         "Name": "status",
         "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.StickNoteTaskController",
+    "Method": "GetStickNoteTaskForStatusAndSector",
+    "RelativePath": "api/StickNoteTask/GetStickNotesTasksByStatusAndSector",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "status",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
         "IsRequired": false
       }
     ],
@@ -56,7 +236,7 @@
       },
       {
         "Name": "newStickNote",
-        "Type": "Domain.Entities.StickNoteTask",
+        "Type": "Domain.Entities.StickNoteTaskForMany",
         "IsRequired": true
       }
     ],
@@ -72,7 +252,7 @@
     "Parameters": [
       {
         "Name": "stickNoteTask",
-        "Type": "Domain.Entities.StickNoteTask",
+        "Type": "Domain.Entities.StickNoteTaskForMany",
         "IsRequired": true
       }
     ],
@@ -122,6 +302,27 @@
   },
   {
     "ContainingType": "Organizet.Controllers.TaskForManyController",
+    "Method": "PutTaskForManyByIdAndSector",
+    "RelativePath": "api/TaskForMany/PutTaskForManyByIdAndSector",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "id",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "taskForMany",
+        "Type": "Domain.Entities.TaskForMany",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.TaskForManyController",
     "Method": "PostTaskForMany",
     "RelativePath": "api/TaskForMany/RegisterNewTaskForMany",
     "HttpMethod": "POST",
@@ -131,6 +332,96 @@
       {
         "Name": "taskForMany",
         "Type": "Domain.Entities.TaskForMany",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.TaskForManySectorsController",
+    "Method": "GetTaskForManySectors",
+    "RelativePath": "api/TaskForManySectors/GetAllTasksForManySector",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.TaskForManySectorsController",
+    "Method": "GetSectorsByTaskId",
+    "RelativePath": "api/TaskForManySectors/GetSectorsByTaskId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idTask",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.TaskForManySectorsController",
+    "Method": "GetTaskForManySectorByTaskId",
+    "RelativePath": "api/TaskForManySectors/GetTaskForManySectorByIdTask",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "idTask",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.TaskForManySectorsController",
+    "Method": "GetTasksForManySectorCompleted",
+    "RelativePath": "api/TaskForManySectors/GetTasksForManySectorCompleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      },
+      {
+        "Name": "initialDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.TaskForManySectorsController",
+    "Method": "PostTaskForManySector",
+    "RelativePath": "api/TaskForManySectors/RegisterNewTaskForManySector",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "taskForManySector",
+        "Type": "Domain.Entities.TaskForManySector",
         "IsRequired": true
       }
     ],
@@ -173,6 +464,27 @@
       {
         "Name": "titleTaskForUser",
         "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.TaskForUserController",
+    "Method": "GetTasksForUserCompleted",
+    "RelativePath": "api/TaskForUser/GetTasksForUserCompleted",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "initalDate",
+        "Type": "System.DateOnly",
+        "IsRequired": false
+      },
+      {
+        "Name": "endDate",
+        "Type": "System.DateOnly",
         "IsRequired": false
       }
     ],

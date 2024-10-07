@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj": {}
+    "C:\\Users\\Nova pasta\\Domain\\Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj": {
+    "C:\\Users\\Nova pasta\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Nova pasta\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\Domain.csproj",
+        "projectPath": "C:\\Users\\Nova pasta\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\Usuário\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Usuário\\source\\repos\\Organizet\\Domain\\obj\\",
+        "outputPath": "C:\\Users\\Nova pasta\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -50,6 +50,10 @@
         "net8.0": {
           "targetAlias": "net8.0",
           "dependencies": {
+            "Microsoft.AspNetCore.SignalR.Client": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite.Core": {
               "target": "Package",
               "version": "[8.0.8, )"
@@ -59,6 +63,18 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[8.0.8, )"
+            },
+            "Npgsql.EntityFrameworkCore.PostgreSQL": {
+              "target": "Package",
+              "version": "[8.0.8, )"
+            },
+            "StackExchange.Redis": {
+              "target": "Package",
+              "version": "[2.8.16, )"
+            },
+            "sqlite-net-sqlcipher": {
+              "target": "Package",
+              "version": "[1.9.172, )"
             }
           },
           "imports": [

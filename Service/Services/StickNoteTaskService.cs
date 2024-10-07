@@ -1,6 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Interfaces;
-using System.Threading.Tasks;
+using Domain.Models;
 
 namespace Service.Services
 {
@@ -8,12 +8,12 @@ namespace Service.Services
     {
         private readonly IStickNoteTaskRepository _repository = repository;
 
-        public async Task<IEnumerable<StickNoteTask>> GetAllStickNote()
+        public async Task<IEnumerable<StickNoteTaskForMany>> GetAllStickNote()
         {
             return await _repository.GetAllStickNote();
         }
 
-        public async Task<StickNoteTask> GetStickNoteById(int id)
+        public async Task<StickNoteTaskForMany> GetStickNoteById(int id)
         {
             var stickNoteTaskDb = await _repository.GetStickNoteById(id);
             if (stickNoteTaskDb == null)
@@ -23,7 +23,7 @@ namespace Service.Services
             return stickNoteTaskDb;
         }
 
-        public async Task<StickNoteTask> GetStickNoteByTaskId(int taskId)
+        public async Task<IEnumerable<StickNoteViewModel>> GetStickNoteByTaskId(int taskId)
         {
             var stickNoteTaskDb = await _repository.GetStickNoteByTaskId(taskId);
             if (stickNoteTaskDb == null)
@@ -31,19 +31,19 @@ namespace Service.Services
                 return null;
             }
             return stickNoteTaskDb;
-        }
+        }       
 
-        public async Task<StickNoteTask> GetStickNoteTaskForStatus(string status)
+        public async Task<IEnumerable<StickNoteViewModel>> GetStickNoteTaskForStatus(int taskId, string status)
         {
-            var stickNoteTaskDb = await _repository.GetStickNoteTaskForStatus(status);
-            if (stickNoteTaskDb == null)
-            {
-                return null;
-            }
-            return stickNoteTaskDb;
+            return await _repository.GetStickNoteTaskForStatus(taskId,status);
         }
 
-        public Task<StickNoteTask> PostStickNoteTask(StickNoteTask stickNoteTask)
+        public async Task<IEnumerable<StickNoteTaskForMany>> GetStickNoteTaskForStatusAndSector(int taskId, string status, int sectorId)
+        {
+           return await _repository.GetStickNoteTaskForStatusAndSector(taskId,status,sectorId);
+        }
+
+        public Task<StickNoteTaskForMany> PostStickNoteTask(StickNoteTaskForMany stickNoteTask)
         {
             if (stickNoteTask == null)
             {
@@ -52,11 +52,32 @@ namespace Service.Services
             return _repository.PostStickNoteTask(stickNoteTask);
         }
 
-        public async Task<StickNoteTask> PutStickNoteById(int id, StickNoteTask newStickNote)
+        public Task<StickNoteTaskForUserBackUp> PostStickNoteTaskForUser(StickNoteTaskForUserBackUp stickNoteTaskForUser)
         {
-            StickNoteTask stickNoteTaskDb = await GetStickNoteById(id);
-            newStickNote.TaskId = id;
-            return await _repository.PutStickNoteById(id, newStickNote);
+            throw new NotImplementedException();
+        }
+
+        public async Task<StickNoteTaskForMany> PutStickNoteById(int id, StickNoteTaskForMany newStickNote)
+        {
+            try
+            {
+                StickNoteTaskForMany stickNoteTaskDb = await GetStickNoteById(id);
+                if (stickNoteTaskDb == null) return null;
+                newStickNote.Id = stickNoteTaskDb.Id;
+                newStickNote.TaskId = stickNoteTaskDb.TaskId;
+                newStickNote.SectorId = stickNoteTaskDb.SectorId;                
+                return await _repository.PutStickNoteById(id, newStickNote);
+            }
+            catch
+            {
+                throw new Exception($"Erro ao atualizar o id: {id}");
+            }
+            
+        }
+
+        public Task<StickNoteTaskForUserBackUp> PutStickNoteByIdForUser(int sitckNoteId, StickNoteTaskForUserBackUp newStickNoteForUser)
+        {
+            throw new NotImplementedException();
         }
     }
 }

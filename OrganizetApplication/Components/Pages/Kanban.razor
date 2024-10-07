@@ -1,22 +1,165 @@
-﻿@page "/kanban"
-@page "/kanban/{TaskName}"
+﻿@page "/kanban/{TaskId:int}/{TaskName}/{IsUser:bool}"
+@using Domain.Entities
+@using Domain.Models
+@using static CacheService
 @inject NavigationManager NavigationManager
-@inject IJSRuntime JSRuntime
+@inject HttpClient httpClient
+@inject CacheService _cacheService
+
 <h1>@PageTitle</h1>
+<div>
+    <button type="button" class="btn btn-link p-0" @onclick="() => ToggleAddMode()" title="Nova Nota">
+        <i class="fas fa-plus"> Nova Nota</i>
+    </button><br /><br />
+    <div>
+        <div class="segmented-bar">
+            @if (!IsUser)
+            {
+                foreach (var taskForMany in TasksForMany)
+                {
+                    <div class="segment">
+                        <button type="button"
+                                @onclick="() => ToggleButtonState(TaskId, taskForMany.SectorId)"
+                                title="Nova Nota"
+                                class="dynamic-button @(buttonStates.ContainsKey(taskForMany.SectorId) && buttonStates[taskForMany.SectorId] ? "active" : "")"
+                                style="--background-color:@taskForMany.Color; --hover-color:@taskForMany.ColorHover; --active-color:@taskForMany.ColorHover; color:white">
+                            <i>@taskForMany.Sector</i>
+                        </button>
+                    </div>
+                }
+            }            
+        </div>
+
+        @if (IsAddNewStickNote == true)
+        {
+            <EditForm Model="stickNoteTask" OnValidSubmit="SubmitForm">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div style="display: flex; align-items: center;">
+                    <label for="title">Conteúdo: </label>
+                    <InputText id="content" @bind-Value="stickNoteTask.Content" required style="margin-left: 10px; width: 650px;" />
+
+                    <!-- Botões logo após o campo de texto -->
+                    <div style="display: flex; gap: 5px; margin-left: 10px;">
+                        <button type="button" class="btn btn-outline-danger" title="Cancelar" @onclick="() => OnCancelCreateStickNote()">
+                            <i class="fas fa-close"></i>
+                        </button>
+                        <button type="submit" class="btn btn-outline-success" title="Salvar">
+                            <i class="fas fa-check"></i>
+                        </button>
+                    </div>
+                </div>
+            </EditForm>
+        }
+    </div>
+</div>
+
+<!-- Kanban Board -->
 <div class="kanban-container">
     @foreach (var column in Columns)
     {
         <div class="kanban-column">
-            <h4>@column.Title</h4>            
-            @foreach (var card in column.Cards)
+            <h4>@column.Title</h4>
+            @foreach (var stickNote in column.NotesTask)
             {
-                <div class="kanban-card" draggable="true">
-                    <h5>@card.Title</h5>
-                    <p>@card.Description</p>
-                    <button type="button" class="btn btn-outline-info" style="margin: 0 auto;display:block">Iniciar</button>
+                <div class="kanban-card" style="position: relative; padding-top: 30px;">
+                    @if (IsEditingStickNoteId == stickNote.Id)
+                    {
+                        <textarea name="textArea" class="form-control" @bind="@stickNote.Content" @oninput="(e) => UpdateStickNoteContent(stickNote.Id, (string)e.Value)" />
+                        <div style="position: absolute; top: 5px; right: 10px; display: flex; gap: 10px;">
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ReloadStickNotes()" title="Cancelar">
+                                <i class="fas fa-close"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => SaveStickNoteContent(stickNote.Id, stickNote.Content)" title="Salvar">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    }
+                    else if (IsAddStickNoteId == stickNote.Id)
+                    {
+                        <p style="font-size: inherit;margin: 20px">@stickNote.Content</p> <br/>
+                        <textarea name="textArea" placeholder="Comentários:" class="form-control" @oninput="(e) => UpdateStickNoteContent(stickNote.Id, (string)e.Value)" />
+                        <div style="position: absolute; top: 5px; right: 10px; display: flex; gap: 10px;">
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ReloadStickNotes()" title="Cancelar">
+                                <i class="fas fa-close"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => SaveStickNoteContent(stickNote.Id, stickNote.Content)" title="Salvar">
+                                <i class="fas fa-check"></i>
+                            </button>
+                        </div>
+                    }
+                    @if(stickNote.Status == "Para Fazer")
+                    {
+                        <div style="position: absolute; top: 5px; right: 10px; display: flex; gap: 10px;">
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ShowMessageBox(stickNote.Id)" title="Excluir">
+                                <i class="fas fa-close"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ToggleEditMode(stickNote)" title="Editar Nota">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => AddSubtask(stickNote)" title="Comentar">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <br />
+                        <p style="font-size: inherit;margin: 20px">@stickNote.Content</p>                        
+                        <button type="button" class="btn btn-info" style="padding: 10px 20px" @onclick="()=> SkipToInProcessStatus(stickNote.Id,stickNote)">Iniciar</button>
+                    }
+                    else if (stickNote.Status == "Em Andamento")
+                    {
+                        <div style="position: absolute; top: 5px; right: 10px; display: flex; gap: 10px;">
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ShowMessageBox(stickNote.Id)" title="Excluir">
+                                <i class="fas fa-close"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ToggleEditMode(stickNote)" title="Editar Nota">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => AddSubtask(stickNote)" title="Comentar">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <br />
+                        <p style="font-size: inherit;margin: 20px">@stickNote.Content</p>                        
+                        <button type="button" class="btn btn-info" @onclick="() => SkipToCompletedStatus(stickNote.Id,stickNote)">Concluir</button>
+                        <button type="button" class="btn btn-secondary" @onclick="() => RevertToToDoStatus(stickNote.Id,stickNote)">Voltar</button>
+                    }
+                    else if (stickNote.Status == "Concluído")
+                    {
+                        <div style="position: absolute; top: 5px; right: 10px; display: flex; gap: 10px;">
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ShowMessageBox(stickNote.Id)" title="Excluir">
+                                <i class="fas fa-close"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ToggleEditMode(stickNote)" title="Editar Nota">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => AddSubtask(stickNote)" title="Comentar">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>
+                        <br />
+                        <p style="font-size: inherit;margin: 20px">@stickNote.Content</p>   
+                        <button type="button" class="btn btn-secondary" style="margin:20px" @onclick="() => SkipToInProcessStatus(stickNote.Id,stickNote)">Voltar</button>
+                       
+                    }
+                    else
+                    {
+                        <div style="position: absolute; top: 5px; right: 10px; display: flex; gap: 10px;">
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ShowMessageBox(stickNote.Id)" title="Excluir">
+                                <i class="fas fa-close"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => ToggleEditMode(stickNote)" title="Editar Nota">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
+                            <button type="button" class="btn btn-link p-0" @onclick="() => AddSubtask(stickNote)" title="Comentar">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                        </div>                        
+                        <p style="font-size: inherit;margin: 20px">@stickNote.Content</p>
+                        <br/>                        
+                    }
                 </div>
-            }            
-           
+            }
         </div>
     }
 </div>
@@ -38,75 +181,508 @@
     }
 
     .kanban-card {
-        background-color: #fdfd96; /* Cor de post-it */
+        background-color: #fdfd96;
         border: 1px solid #ccc;
         border-radius: 8px;
         padding: 10px;
         margin-bottom: 10px;
         box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
-        width: 200px; /* Ajuste a largura conforme necessário */
+        width: 200px;
     }
 
         .kanban-card h5 {
             margin-top: 0;
         }
 </style>
+<MessageBox 
+    IsVisible="showMessageBox"
+    Message=" Deseja confirmar esta ação?" 
+    OnConfirm="@(async (id) => await OnConfirm(id))"  
+    OnCancel="OnCancel" 
+    Id="Id"
+/>
+
+<MessageBoxForAll
+    IsVisible="IsVisible"
+    Message="Nota adicionada com sucesso!"
+    IsLoading="IsLoading"/>
 
 @code {
     [Parameter]
     public string TaskName { get; set; }
-    public string PageTitle { get; set; } = "Kanban";
+    [Parameter]
+    public int TaskId { get; set; }
+    [Parameter]
+    public bool IsUser { get; set; }
 
-    private Card draggedCard;
-    private Column sourceColumn;
+    public int Id { get; set; }
+    public string PageTitle { get; set; } = "Kanban";
+    public StickNoteViewModel stickNoteTask = new StickNoteViewModel();
+    public List<StickNoteViewModel> SticksNotesTasks = new List<StickNoteViewModel>();
+    public List<TaskViewModel> TasksForMany = new List<TaskViewModel>();
+    public int? IsEditingStickNoteId = null;
+    public int? IsAddStickNoteId = null;
+    public int? IsDeleteStickNoteId = null;    
+    public bool IsLoading = false;
+    public bool IsVisible = false;
+    public bool IsAddNewStickNote = false;
+    private Dictionary<int, bool> buttonStates = new Dictionary<int, bool>();
+    private bool showMessageBox = false;
+
+    private void ShowMessageBox(int id)
+    {      
+        Id = id;       
+        showMessageBox = true;
+    }
+
+    private async Task OnConfirm(int id)
+    {
+        var stickNotePut = await PutStatusStickNoteForId(id);
+        if(stickNotePut != null)
+        {
+            showMessageBox = false;
+
+        }
+
+    }
+
+    private async Task ShowMessageBoxGeneric()
+    {
+        IsVisible = true;
+        await ReloadStickNotes();
+        await Task.CompletedTask;
+    }
+
+    private async Task OnCancel()
+    {
+        showMessageBox = false;
+        await Task.CompletedTask;
+    }
+
+    private void ToggleButtonState(int taskId, int sectorId)
+    {
+        // Desativa todos os botões
+        foreach (var key in buttonStates.Keys.ToList())
+        {
+            buttonStates[key] = false;
+        }
+
+        // Ativa apenas o botão clicado
+        buttonStates[sectorId] = true; // Alterna o estado do botão
+        LoadStickNoteByStatusAndSector(taskId, sectorId);
+    }
+
+    // public List<StickNoteTask> stickNoteTasks = new List<StickNoteTask>();
+    private List<Column> Columns = new List<Column>
+    {
+        new Column { Title = "Para Fazer" },
+        new Column { Title = "Em Andamento" },
+        new Column { Title = "Concluído" }
+    };
+
+    protected override async Task OnInitializedAsync()
+    {
+        // Carrega as notas e tarefas da cache de forma assíncrona
+        var stickNotes = await LoadStickNotesForTaskId(TaskId);
+        var tasksForMany = await LoadFromCache(TaskId);
+
+        // Converte as listas para poder usar localmente
+        SticksNotesTasks = stickNotes.ToList();
+        TasksForMany = tasksForMany.ToList();
+        // Inicializa os estados dos botões
+        foreach (var taskForMany in TasksForMany)
+        {
+            buttonStates[taskForMany.SectorId] = false;
+        }
+        // Atualiza as colunas com base nas notas filtradas
+        foreach (var column in Columns)
+        {
+            // Filtra as notas com base no SectorId e Status correspondentes à coluna
+            column.NotesTask = FilterDataFromCache(TaskId, u => u.SectorId == 1 && u.Status == column.Title).ToList();
+        }
+    }
+
+
+    public async Task<IEnumerable<TaskViewModel>> LoadFromCache(int taskId)
+    {
+        try
+        {
+            string cacheKey = $"TaskId:{taskId}";
+            var currentTime = DateTime.UtcNow;
+
+            if (_cacheForMany.TryGetValue(cacheKey, out var cachedItem) && cachedItem.Expiration > currentTime)
+            {
+                return cachedItem.Data;
+            }
+
+            var taskForMany = await httpClient.GetFromJsonAsync<IEnumerable<TaskViewModel>>($"TaskForManySectors/GetTaskForManySectorByIdTask?idTask={taskId}");
+
+
+            _cacheForMany[cacheKey] = new CacheTaskForManyView
+                {
+                    Data = taskForMany,
+                    Expiration = currentTime.AddMinutes(5)
+                };
+
+            return taskForMany;
+
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Erro ao fazer GET: {ex.Message}");
+            return Enumerable.Empty<TaskViewModel>();
+        }
+    } 
+
+    private void LoadStickNoteByStatusAndSector(int taskId, int sectorId)
+    {        
+        foreach (var column in Columns)
+        {            
+            column.NotesTask = FilterDataFromCache(TaskId, note => note.SectorId == sectorId && note.Status == column.Title);
+        }
+        StateHasChanged();
+    }
+
+    private async Task<StickNoteTaskForMany> GetStickNoteById(int id)
+    {
+        var response = await httpClient.GetFromJsonAsync<StickNoteTaskForMany>($"StickNoteTask/GetStickNoteById?Id={id}");
+        if(response == null)
+        {
+            return null;
+        }
+
+        return response;
+    }
+
 
     protected override void OnParametersSet()
     {
-        Console.WriteLine($"TaskName recebido: {TaskName}"); // Log para depuração
+        Console.WriteLine($"TaskName recebido: {TaskName}");
         if (!string.IsNullOrEmpty(TaskName))
         {
             PageTitle = Uri.UnescapeDataString(TaskName);
         }
     }
 
-    private List<Column> Columns = new List<Column>
+    public async Task SubmitForm()
     {
-        new Column
+        try
         {
-            Title = "Para Fazer",
-            Cards = new List<Card>
-            {
-                new Card { Title = "Tarefa 1", Description = "Verificar fechamento e enviar os arquivos conforme padrão." },
-                new Card { Title = "Tarefa 2", Description = "Descrição da Tarefa 2" }
-            }
-        },
-        new Column
+            IsLoading = true;
+            IsVisible = true;
+            await PostNewStickNote(stickNoteTask);
+
+        }
+        finally
         {
-            Title = "Em Andamento",
-            Cards = new List<Card>
-            {
-                new Card { Title = "Tarefa 3", Description = "Descrição da Tarefa 3" }
-            }
-        },
-        new Column
+            var label = new Label();
+            label.Text = "Nota criada com sucesso";
+            stickNoteTask.Content = "";
+        }
+
+    }
+
+    public void OnCancelCreateStickNote()
+    {
+        IsAddNewStickNote = false;
+    }
+
+
+    public async Task<IEnumerable<StickNoteViewModel>> LoadStickNotesForStatus(int taskId, string status)
+    {        
+        string cacheKey = $"{taskId}-{status}";
+        if (_cacheService.TryGetCachedItem(cacheKey, out var cachedObject))
         {
-            Title = "Concluído",
-            Cards = new List<Card>
+            var cachedStickNotes = cachedObject as IEnumerable<StickNoteViewModel>;
+            if (cachedStickNotes != null)
             {
-                new Card { Title = "Tarefa 4", Description = "Descrição da Tarefa 4" }
+                return cachedStickNotes;
             }
         }
-    };
 
-    private class Column
-    {
-        public string Title { get; set; }
-        public List<Card> Cards { get; set; }
+        try
+        {
+            var sticksNotesTasks = await httpClient.GetFromJsonAsync<IEnumerable<StickNoteViewModel>>($"StickNoteTask/GetStickNotesTasksByStatus?taskId={taskId}&status={status}");            
+            return sticksNotesTasks;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao carregar notas: {ex.Message}");
+            return Enumerable.Empty<StickNoteViewModel>();
+        }
     }
 
-    private class Card
+    public async Task<IEnumerable<StickNoteViewModel>> LoadStickNotesForTaskId(int taskId)
     {
-        public string Title { get; set; }
-        public string Description { get; set; }
+
+        try
+        {
+            string cacheKey = $"{taskId}";            
+            var currenTime = DateTime.UtcNow;
+
+            if (_cache.TryGetValue(cacheKey, out var cachedItem) && cachedItem.Expiration > currenTime)
+            {
+                return cachedItem.Data;
+            }
+
+            // Se o item não estiver no cache ou estiver expirado, carrega os dados
+            var stickNoteViews = await httpClient.GetFromJsonAsync<IEnumerable<StickNoteViewModel>>($"StickNoteTask/GetStickNoteByTaskId?Id={taskId}");
+
+
+            // Cria um novo CacheItem com os dados e a data de expiração
+            _cache[cacheKey] = new CacheItem
+                {
+                    Data = stickNoteViews,
+                    Expiration = currenTime.AddMinutes(5)
+                };
+
+            return stickNoteViews;
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao carregar notas: {ex.Message}");
+            return Enumerable.Empty<StickNoteViewModel>();
+        }
     }
+
+    public async Task<StickNoteViewModel> PutStatusStickNoteForId(int stickId)
+    { 
+        try
+        {
+            var stickNote =  FindStickNoteById(stickId);
+            if (stickNote != null)
+            {
+                StickNoteTaskForMany newStickNote = new StickNoteTaskForMany
+                    {
+                        Id = stickNote.Id,
+                        Content = stickNote.Content,
+                        TaskId = TaskId,
+                        SectorId = 1,
+                        Status = stickNote.Status,
+                        IsActive = false
+                    };
+                var response = await httpClient.PutAsJsonAsync($"StickNoteTask/PutStickNotesTasksById?id={stickId}", newStickNote);
+
+                if (response.IsSuccessStatusCode)
+                {
+
+                    await ReloadStickNotes();
+
+                }
+                else
+                {
+                    Console.WriteLine($"Erro ao atualizar nota: {response.ReasonPhrase}");
+
+                }
+
+            }
+
+            return stickNote;
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao fazer PUT: {ex.Message}");
+            return null;
+        }
+    }
+
+    public async Task SkipToInProcessStatus(int id, StickNoteViewModel stickNoteTask)
+    {
+        StickNoteTaskForMany stickNote = new StickNoteTaskForMany
+            {
+                Id = stickNoteTask.Id,
+                Content = stickNoteTask.Content,
+                TaskId = stickNoteTask.TaskId,
+                SectorId = stickNoteTask.SectorId,
+                Status = "Em Andamento",
+                IsActive = stickNoteTask.IsActive
+            };
+        await httpClient.PutAsJsonAsync($"StickNoteTask/PutStickNotesTasksById?id={id}", stickNote);
+        await ReloadStickNotes();
+    }
+
+    public async Task RevertToToDoStatus(int stickId, StickNoteViewModel stickNoteTask)
+    {
+        StickNoteTaskForMany stickNote = new StickNoteTaskForMany
+            {
+                Id = stickNoteTask.Id,
+                Content = stickNoteTask.Content,
+                TaskId = stickNoteTask.TaskId,
+                SectorId = stickNoteTask.SectorId,
+                Status = "Para Fazer",
+                IsActive = stickNoteTask.IsActive
+            };
+        var stickNoteForColumn = FindStickNoteById(stickId);
+        if (stickNoteForColumn != null)
+        {
+            await httpClient.PutAsJsonAsync($"StickNoteTask/PutStickNotesTasksById?id={stickId}", stickNote);
+        }
+
+        await ReloadStickNotes();
+    }
+
+    public async Task SkipToCompletedStatus(int stickId, StickNoteViewModel stickNoteTask)
+    {
+        StickNoteTaskForMany stickNote = new StickNoteTaskForMany
+            {
+                Id = stickNoteTask.Id,
+                Content = stickNoteTask.Content,
+                TaskId = stickNoteTask.TaskId,
+                SectorId = stickNoteTask.SectorId,
+                Status = "Concluído",
+                IsActive = stickNoteTask.IsActive
+            };
+        await httpClient.PutAsJsonAsync($"StickNoteTask/PutStickNotesTasksById?id={stickId}", stickNote);
+        await ReloadStickNotes();
+    }
+
+    public void ToggleEditMode(StickNoteViewModel stickNoteTask)
+    {
+        IsEditingStickNoteId = stickNoteTask.Id;
+    }
+
+    public void ToggleAddMode()
+    {
+        IsAddNewStickNote = true;
+    }
+
+    public void AddSubtask(StickNoteViewModel stickNoteTask)
+    {
+        IsAddStickNoteId = stickNoteTask.Id;
+    }
+
+    public void DeleteTask(StickNoteViewModel stickNoteTask)
+    {
+        IsDeleteStickNoteId = stickNoteTask.Id;
+        showMessageBox = true;
+    }
+
+    private async Task ReloadStickNotes()
+    {
+        IsEditingStickNoteId = null;
+        IsAddStickNoteId = null;
+        _cache.Clear();        
+        var stickNotes = await LoadStickNotesForTaskId(TaskId);
+        var tasksForMany = await LoadFromCache(TaskId);
+
+        // Converte as listas para poder usar localmente
+        SticksNotesTasks = stickNotes.ToList();
+        TasksForMany = tasksForMany.ToList();
+        // Inicializa os estados dos botões
+        foreach (var taskForMany in TasksForMany)
+        {
+            buttonStates[taskForMany.SectorId] = false;
+        }
+        // Atualiza as colunas com base nas notas filtradas
+        foreach (var column in Columns)
+        {
+            // Filtra as notas com base no SectorId e Status correspondentes à coluna
+            column.NotesTask = FilterDataFromCache(TaskId, u => u.SectorId == 1 && u.Status == column.Title).ToList();
+        }
+        StateHasChanged();
+    }    
+
+    // Método para atualizar o conteúdo do Stick Note em tempo real
+    public void UpdateStickNoteContent(int id, string newContent)
+    {
+        // Localiza a nota correspondente e atualiza o conteúdo
+        var stickNote = FindStickNoteById(id);
+        if (stickNote != null)
+        {
+            stickNote.Content = newContent;
+        }
+    }
+
+    public async Task PostNewStickNote(StickNoteViewModel stickNoteTask)
+    {
+        StickNoteTaskForMany stickNote = new StickNoteTaskForMany
+            {
+                Id = stickNoteTask.Id,
+                Content = stickNoteTask.Content,
+                TaskId = TaskId,
+                SectorId = 1,
+                Status = "Para Fazer",
+                IsActive = true
+            };
+        IsAddNewStickNote = false;
+        var response = await httpClient.PostAsJsonAsync($"StickNoteTask/RegisterStickNoteTask", stickNote);
+        if (response.IsSuccessStatusCode)
+        {
+            // Atualiza a lista de notas após salvar
+            IsLoading = false;
+            await ShowMessageBoxGeneric();
+        }
+    }
+
+    // Método para salvar o conteúdo atualizado do Stick Note
+    public async Task SaveStickNoteContent(int id, string newContent)
+    {
+        IsEditingStickNoteId = null;
+        var stickNote = FindStickNoteById(id);
+        if (stickNote != null)
+        {
+            StickNoteTaskForMany newStickNote = new StickNoteTaskForMany
+                {
+                    Id = stickNote.Id,
+                    Content = newContent,
+                    TaskId = TaskId,
+                    SectorId = 1,
+                    Status = stickNote.Status,
+                    IsActive = true
+                };
+            // Envia a atualização para o servidor
+            var response = await httpClient.PutAsJsonAsync($"StickNoteTask/PutStickNotesTasksById?id={id}", newStickNote);
+            if (response.IsSuccessStatusCode)
+            {
+                // Atualiza a lista de notas após salvar
+                await ReloadStickNotes();
+            }
+        }
+    }
+
+    public IEnumerable<StickNoteViewModel> FilterDataFromCache(int taskId, Func<StickNoteViewModel, bool> filterPredicate = null)
+    {
+        string cacheKey = $"{taskId}";
+
+        if (_cache.TryGetValue(cacheKey, out var cachedItem))
+        {
+            // Se um filtro for fornecido, aplique-o
+            return filterPredicate != null
+                ? cachedItem.Data.Where(filterPredicate).ToList()
+                : cachedItem.Data.ToList();
+        }
+
+        // Caso o cache não tenha nada, retorna uma coleção vazia
+        return Enumerable.Empty<StickNoteViewModel>();
+    }
+
+
+    private StickNoteViewModel FindStickNoteById(int id)
+    {
+        return Columns.SelectMany(c => c.NotesTask).FirstOrDefault(s => s.Id == id);
+    }   
+
+    public class Column
+    {
+        public string Title { get; set; }       
+        public IEnumerable<StickNoteViewModel> NotesTask { get; set; } = new List<StickNoteViewModel>();
+    }
+
+    private class CacheItem
+    {
+        public IEnumerable<StickNoteViewModel> Data { get; set; }
+        public DateTime Expiration { get; set; }
+
+    }    
+
+    private class CacheTaskForManyView
+    {
+        public IEnumerable<TaskViewModel> Data { get; set; }
+        public DateTime Expiration { get; set; }
+    }
+
+    private static Dictionary<string, CacheTaskForManyView> _cacheForMany = new Dictionary<string, CacheTaskForManyView>();
+    private static Dictionary<string, CacheItem> _cache = new Dictionary<string, CacheItem>();    
 }

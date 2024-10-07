@@ -8,5 +8,6 @@ namespace Domain.Interfaces
         Task<IEnumerable<TaskForMany>> GetTasksForMany();
         Task<TaskForMany> GetTaskForManyByTitle(string titleTaskForMany);
         Task<TaskForMany> GetTaskForManyById(int idTaskForMany);
+        Task<TaskForMany> PutTaskForManyByIdAndSector(int id, TaskForMany taskForMany);
     }
 }

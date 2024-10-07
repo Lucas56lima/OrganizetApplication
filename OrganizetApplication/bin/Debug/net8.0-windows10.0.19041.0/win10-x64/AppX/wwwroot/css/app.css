@@ -1,5 +1,14 @@
 ﻿html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100%;
+    margin: 0; /* Remove margens padrão */
+    padding: 0;
+}
+
+.main-container {
+    height: 100vh; /* O contêiner principal ocupa 100% da altura da viewport */
+    display: flex; /* Para utilizar o layout flexível, se necessário */
+    flex-direction: column; /* Organiza os itens na vertical */
 }
 
 a, .btn-link {

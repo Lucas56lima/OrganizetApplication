@@ -1,40 +1,281 @@
 ﻿.kanban-container {
     display: flex;
-    gap: 16px;
-    padding: 16px;
+    flex-direction: row;
 }
 
 .kanban-column {
-    background-color: #f4f4f4;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 300px;
-    padding: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 30%;
+    margin: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative;
+    min-height: 200px; /* Para garantir que as colunas tenham altura mínima */
 }
-
-    .kanban-column h4 {
-        text-align: center;
-        font-size: 1.2em;
-        margin-bottom: 8px;
-    }
 
 .kanban-card {
-    background-color: #fff;
+    background: #fff;
+    padding: 10px;
+    margin-bottom: 10px;
     border: 1px solid #ddd;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    padding: 8px;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+    text-align: center;
 }
 
-    .kanban-card h5 {
-        margin: 0;
-        font-size: 1em;
+    .kanban-card.dragging {
+        opacity: 0.5;
+    }
+.popup-overlay {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: initial;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.popup-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    position: center;
+    width: 40%;
+    max-width: 250px;
+    align-items: center;
+    justify-content: center;
+}
+
+.loading-spinner-container {
+    display: flex; /* Usando flexbox */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    height: var(--spinner-height,100vh); /* Ocupa a altura total da tela */
+}
+
+.loading-spinner {
+    border: 4px solid #f3f3f3; /* Cinza claro */
+    border-top: 4px solid #3498db; /* Azul */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 2s linear infinite;
+}
+
+.popup-content {
+    position: relative;
+    padding: 20px;
+    /* Outras regras de estilo */
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: none;
+    background: transparent;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #333;
+}
+
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Outras regras de estilo */
+}
+.segmented-bar {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: #f4f4f4;
+}
+
+.segment {
+    flex: 1;
+    text-align: center;
+    position: relative;
+}
+
+    .segment button {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+        font-size: 16px;
     }
 
-    .kanban-card p {
-        margin: 0;
-        font-size: 0.9em;
-        color: #555;
+        .segment button:hover {
+            background-color: #ddd;
+        }
+
+    .segment:not(:last-child) {
+        border-right: 1px solid #ccc;
+    }
+
+.scrollable-container {
+    max-height: 80vh; /* Define a altura máxima como 80% da altura da viewport */
+    overflow-y: auto; /* Permite rolagem vertical */
+}
+
+/* Estilo padrão do botão, com variáveis CSS para as cores */
+button.dynamic-button {
+    background-color: var(--background-color, lightgray);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+    /* Efeito de hover contínuo ao clicar */
+    button.dynamic-button.active {
+        background-color: var(--active-color, darkgray);
+    }
+
+    /* Estilo de hover temporário */
+    button.dynamic-button:hover {
+        background-color: var(--hover-color, gray);
+    }
+
+.popup-overlay {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4); /* Fundo semi-transparente */
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    text-align: initial;
+}
+
+.popup-actions {
+    margin-top: 10px;
+}
+
+.popup-actions button {
+    margin: 5px;
+}
+
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.modal {
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px; /* Ajuste conforme necessário */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    position: relative; /* Relativo ao seu pai */
+    
+}
+
+.close {
+    color: #aaa;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+    .close:hover,
+    .close:focus {
+        color: black;
+        text-decoration: none;
+    }
+
+button {
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.button-container {
+    display: flex;
+    justify-content: space-between; /* Distribui os botões com espaço entre eles */
+}
+
+    .button-container button {
+        padding: 10px 20px; /* Ajuste conforme necessário */
+        border: none;         /* Cor do botão */
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+.btn btn-success:hover {
+    color: #006400;
+}
+.btn btn-danger:hover {
+    color: #8B0000;
+}
+
+.sectors-content {
+    justify-content: initial;
+    align-items: initial;
+}
+.notification-popup {
+    position: fixed; /* Fixa o balão em relação à janela */
+    bottom: 20px; /* Distância do fundo da tela */
+    right: 20px; /* Distância da direita da tela */
+    background-color: #f8d7da; /* Cor de fundo do balão */
+    color: #721c24; /* Cor do texto */
+    padding: 15px; /* Espaçamento interno */
+    border: 1px solid #f5c6cb; /* Borda do balão */
+    border-radius: 5px; /* Bordas arredondadas */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Sombra */
+    z-index: 1000; /* Certifica-se de que o balão está na frente de outros elementos */
+    transition: opacity 0.5s; /* Animação de transição de opacidade */
+}
+
+    .notification-popup.hidden {
+        opacity: 0; /* Oculta o balão */
+        pointer-events: none; /* Desabilita interações quando oculto */
     }

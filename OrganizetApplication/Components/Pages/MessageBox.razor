@@ -1,0 +1,53 @@
+﻿@code {
+    [Parameter]
+    public bool IsVisible { get; set; }
+
+    [Parameter]
+    public string Message { get; set; }
+
+    [Parameter]
+    public EventCallback<int> OnConfirm { get; set; }
+
+    [Parameter]
+    public EventCallback OnCancel { get; set; }
+
+    [Parameter]
+    public int Id { get; set; } // Adicionado para passar o ID
+
+    private async Task Confirm()
+    {
+        if (OnConfirm.HasDelegate)
+        {
+            await OnConfirm.InvokeAsync(Id); // Passa o ID ao confirmar
+        }
+        Close(); // Fecha o modal após a confirmação
+    }
+
+    private async Task Cancel()
+    {
+        if (OnCancel.HasDelegate)
+        {
+            await OnCancel.InvokeAsync();
+        }
+        Close(); // Fecha o modal após o cancelamento
+    }
+
+    private void Close()
+    {
+        IsVisible = false;
+    }
+}
+
+@if (IsVisible)
+{
+    <div class="modal">
+        <div class="modal-content">
+            <span class="close-btn" @onclick="Cancel">&times;</span><br /><br />
+            <p style="margin-left:20px">@Message</p>
+            <div class="button-container">
+                <button class="btn btn-success" @onclick="Confirm">Confirmar</button>
+                <button class="btn btn-danger"  @onclick="Cancel">Cancelar</button>
+            </div>
+        </div>
+    </div>
+}

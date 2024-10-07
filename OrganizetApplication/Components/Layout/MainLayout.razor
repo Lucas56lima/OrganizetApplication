@@ -1,17 +1,143 @@
-﻿@inherits LayoutComponentBase
-
+﻿@using Domain.Entities
+@inherits LayoutComponentBase
+@inject HttpClient http
+@inject NavigationManager Navigation
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
+    <div class="sidebar">        
+        <NavMenu />        
     </div>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
-        </div>
+    <main>       
 
         <article class="content px-4">
             @Body
         </article>
     </main>
+    <div class="notification-popup @(showNotification ? "" : "hidden")" @ondblclick="() => ViewDetails(TaskId,true)" >
+        <button type="button" class="close-btn" @onclick="ClosePopup">&times;</button><br/><br/>
+        <p>@NotificationMessage</p>        
+    </div>
 </div>
+
+@code
+{
+    private string NotificationMessage;
+    private bool showNotification = false;
+    private int NotificationId;
+    private int TaskId;
+    private string TaskName;
+    protected override async Task OnInitializedAsync()
+    {
+        await StartListening();
+    }
+    private bool stopListening = false; // Flag para parar o loop, se necessário
+
+    private async Task StartListening()
+    {
+        int clientId = 1;
+
+        // Loop para buscar notificações periodicamente
+        while (!stopListening) // Loop só continua enquanto stopListening for false
+        {
+            try
+            {
+                // Chamada ao endpoint para buscar notificações
+                var response = await http.GetFromJsonAsync<Notification>($"Notifications/GetNotificationBySectorId?sectorId={clientId}");
+
+                // Se a resposta não for nula, processa a notificação
+                if (response != null)
+                {
+                    var newMessage = response.Message;
+
+                    // Verifica se a mensagem não é nula ou vazia
+                    if (!string.IsNullOrWhiteSpace(newMessage))
+                    {
+                        try
+                        {
+                            NotificationMessage = newMessage;
+                            NotificationId = response.Id;
+                            TaskId = response.TaskId;
+                            showNotification = true;
+                            StateHasChanged(); // Atualiza a interface do usuário
+                        }
+                        catch (Exception ex)
+                        {
+                            Console.WriteLine($"Erro ao processar a notificação: {ex.Message}");
+                        }
+                    }
+                }
+            }
+            catch (HttpRequestException httpEx)
+            {
+                // Captura erros de requisição HTTP
+                Console.WriteLine($"Erro na requisição HTTP: {httpEx.Message}");
+            }
+            catch (Exception ex)
+            {
+                // Captura qualquer outra exceção
+                Console.WriteLine($"Erro inesperado: {ex.Message}");
+            }
+
+            // Aguarda 5 segundos antes de tentar novamente
+            await Task.Delay(5000);
+        }
+    }
+
+   
+    // Método para parar a escuta (pode ser chamado ao sair da página, por exemplo)
+    private void StopListening()
+    {
+        stopListening = true;
+    }
+    
+    private void ViewDetails(int taskId, bool isUser)
+    {        
+        var encodeName = Uri.EscapeDataString("Abertura de Loja ");
+        Navigation.NavigateTo($"/kanban/{taskId}/{encodeName}/{isUser}");      
+
+    }
+
+    private async Task ClosePopup()
+    {
+        await PutNotification(NotificationId);
+        showNotification = false;
+    }
+
+    private async Task<Notification> PutNotification(int notificationId)
+    {
+        // Chamada ao endpoint para buscar notificações
+        var response = await http.GetFromJsonAsync<Notification>($"Notifications/GetNotificationById?id={notificationId}");
+        if (response != null)
+        {
+            Notification newNotification = new Notification
+                {
+                    Id = response.Id,
+                    Message = response.Message,
+                    Color = response.Color,
+                    ColorHover = response.ColorHover,
+                    SectorId = response.SectorId,
+                    CreateDate = response.CreateDate,
+                    CreateHour = response.CreateHour,
+                    TaskId = response.TaskId,
+                    IsRead = response.IsRead,
+                    IsNew = false,
+                    IsActive = response.IsActive
+                };
+
+
+            var putNotification = await http.PutAsJsonAsync($"Notifications/PutNotificationById?id={notificationId}", newNotification);
+            if(putNotification.IsSuccessStatusCode)
+            {
+                showNotification = false;                
+            }
+            return newNotification;
+
+        }
+        else
+        {
+            return null;
+        }
+    }
+
+    
+}

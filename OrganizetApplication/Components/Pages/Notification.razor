@@ -1,0 +1,25 @@
+﻿@page "/notifications"
+@inject HttpClient Http
+
+<h3>Notificações</h3>
+@if (IsVisible)
+{
+    <div class="notification-popup">
+        <p>@notificationMessage</p>
+        <button @onclick="ClosePopup">Fechar</button>
+    </div>
+}
+@code {
+
+    [Parameter]
+    public bool IsVisible { get; set; }
+    [Parameter]
+    public EventCallback<bool> IsVisibleChanged { get; set; }
+    [Parameter]
+    public string notificationMessage { get; set; }
+
+    private void ClosePopup()
+    {
+        IsVisible = false; // Fecha o popup
+    }
+}
