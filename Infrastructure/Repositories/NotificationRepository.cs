@@ -41,13 +41,7 @@ namespace Infrastructure.Repositories
             }
 
             // Busca a notificação no banco de dados
-            var notificationDb = await GetNotificationById(id);
-
-            // Verifica se a notificação existe
-            if (notificationDb == null)
-            {
-                throw new KeyNotFoundException($"Notificação com ID {id} não foi encontrada.");
-            }
+            var notificationDb = await GetNotificationById(id) ?? throw new KeyNotFoundException($"Notificação com ID {id} não foi encontrada.");
 
             // Atualiza os valores da notificação do banco de dados com os valores da notificação passada
             _contextServer.Entry(notificationDb).CurrentValues.SetValues(notification);
@@ -69,5 +63,14 @@ namespace Infrastructure.Repositories
             return notificationDb;
         }
 
+        public async Task<IEnumerable<Notification>> GetNotificationsBySectorId(int sectorId)
+        {
+            var notifications = await _contextServer.Notifications
+                                .Where(u => u.IsActive == true && u.SectorId == sectorId)
+                                .OrderByDescending(u => u.Id)
+                                .ToListAsync();
+
+            return notifications;
+        }
     }
 }

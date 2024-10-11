@@ -53,7 +53,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.MapHub<SendNotification>("/sendnotification");
+
 app.UseCors("AllowFrontend");
 app.UseHttpsRedirection();
 

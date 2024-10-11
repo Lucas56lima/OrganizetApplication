@@ -29,25 +29,25 @@
     <AppXManifest Include="C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2024-10-07T19:19:44.857</Modified>
+      <Modified>2024-10-11T20:05:48.605</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2024-10-07T14:43:44.122</Modified>
+      <Modified>2024-10-11T20:02:46.503</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\OrganizetApplication.runtimeconfig.json">
       <PackagePath>OrganizetApplication.runtimeconfig.json</PackagePath>
-      <Modified>2024-10-07T14:43:43.874</Modified>
+      <Modified>2024-10-11T20:05:48.322</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\OrganizetApplication.dll">
       <PackagePath>OrganizetApplication.dll</PackagePath>
-      <Modified>2024-10-07T19:19:42.782</Modified>
+      <Modified>2024-10-11T20:02:40.136</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\apphost.exe">
       <PackagePath>OrganizetApplication.exe</PackagePath>
-      <Modified>2024-10-07T19:19:42.947</Modified>
+      <Modified>2024-10-11T20:02:40.147</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\Resources\Raw\AboutAssets.txt">
       <PackagePath>AboutAssets.txt</PackagePath>
@@ -87,23 +87,23 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-100.png">
       <PackagePath>splashSplashScreen.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:00.762</Modified>
+      <Modified>2024-10-11T20:02:36.459</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-125.png">
       <PackagePath>splashSplashScreen.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:00.791</Modified>
+      <Modified>2024-10-11T20:02:36.484</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-150.png">
       <PackagePath>splashSplashScreen.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:00.831</Modified>
+      <Modified>2024-10-11T20:02:36.519</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-200.png">
       <PackagePath>splashSplashScreen.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:00.887</Modified>
+      <Modified>2024-10-11T20:02:36.570</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\sp\splashSplashScreen.scale-400.png">
       <PackagePath>splashSplashScreen.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:01.116</Modified>
+      <Modified>2024-10-11T20:02:36.799</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\f\OpenSans-Regular.ttf">
       <PackagePath>OpenSans-Regular.ttf</PackagePath>
@@ -111,239 +111,239 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appicon.ico">
       <PackagePath>appicon.ico</PackagePath>
-      <Modified>2024-10-03T19:03:02.399</Modified>
+      <Modified>2024-10-11T20:02:38.353</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-100.png">
       <PackagePath>appiconLargeTile.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.382</Modified>
+      <Modified>2024-10-11T20:02:38.327</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-125.png">
       <PackagePath>appiconLargeTile.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.382</Modified>
+      <Modified>2024-10-11T20:02:38.327</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-150.png">
       <PackagePath>appiconLargeTile.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.381</Modified>
+      <Modified>2024-10-11T20:02:38.326</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-200.png">
       <PackagePath>appiconLargeTile.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.381</Modified>
+      <Modified>2024-10-11T20:02:38.325</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLargeTile.scale-400.png">
       <PackagePath>appiconLargeTile.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.381</Modified>
+      <Modified>2024-10-11T20:02:38.325</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-16.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.392</Modified>
+      <Modified>2024-10-11T20:02:38.339</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-24.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.391</Modified>
+      <Modified>2024-10-11T20:02:38.338</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-256.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.390</Modified>
+      <Modified>2024-10-11T20:02:38.337</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-32.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.391</Modified>
+      <Modified>2024-10-11T20:02:38.338</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-lightunplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-lightunplated_targetsize-48.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.390</Modified>
+      <Modified>2024-10-11T20:02:38.337</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-16.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-16.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.394</Modified>
+      <Modified>2024-10-11T20:02:38.341</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-24.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-24.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.393</Modified>
+      <Modified>2024-10-11T20:02:38.340</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-256.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-256.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.392</Modified>
+      <Modified>2024-10-11T20:02:38.339</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-32.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-32.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.393</Modified>
+      <Modified>2024-10-11T20:02:38.340</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.altform-unplated_targetsize-48.png">
       <PackagePath>appiconLogo.altform-unplated_targetsize-48.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.392</Modified>
+      <Modified>2024-10-11T20:02:38.339</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-100.png">
       <PackagePath>appiconLogo.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.398</Modified>
+      <Modified>2024-10-11T20:02:38.352</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-125.png">
       <PackagePath>appiconLogo.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.398</Modified>
+      <Modified>2024-10-11T20:02:38.352</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-150.png">
       <PackagePath>appiconLogo.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.397</Modified>
+      <Modified>2024-10-11T20:02:38.351</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-200.png">
       <PackagePath>appiconLogo.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.397</Modified>
+      <Modified>2024-10-11T20:02:38.351</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.scale-400.png">
       <PackagePath>appiconLogo.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.396</Modified>
+      <Modified>2024-10-11T20:02:38.350</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-16.png">
       <PackagePath>appiconLogo.targetsize-16.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.396</Modified>
+      <Modified>2024-10-11T20:02:38.350</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-24.png">
       <PackagePath>appiconLogo.targetsize-24.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.396</Modified>
+      <Modified>2024-10-11T20:02:38.350</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-256.png">
       <PackagePath>appiconLogo.targetsize-256.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.394</Modified>
+      <Modified>2024-10-11T20:02:38.348</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-32.png">
       <PackagePath>appiconLogo.targetsize-32.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.395</Modified>
+      <Modified>2024-10-11T20:02:38.349</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconLogo.targetsize-48.png">
       <PackagePath>appiconLogo.targetsize-48.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.395</Modified>
+      <Modified>2024-10-11T20:02:38.349</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-100.png">
       <PackagePath>appiconMediumTile.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.386</Modified>
+      <Modified>2024-10-11T20:02:38.332</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-125.png">
       <PackagePath>appiconMediumTile.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.385</Modified>
+      <Modified>2024-10-11T20:02:38.332</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-150.png">
       <PackagePath>appiconMediumTile.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.385</Modified>
+      <Modified>2024-10-11T20:02:38.331</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-200.png">
       <PackagePath>appiconMediumTile.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.384</Modified>
+      <Modified>2024-10-11T20:02:38.331</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconMediumTile.scale-400.png">
       <PackagePath>appiconMediumTile.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.384</Modified>
+      <Modified>2024-10-11T20:02:38.330</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-100.png">
       <PackagePath>appiconSmallTile.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.387</Modified>
+      <Modified>2024-10-11T20:02:38.334</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-125.png">
       <PackagePath>appiconSmallTile.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.387</Modified>
+      <Modified>2024-10-11T20:02:38.334</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-150.png">
       <PackagePath>appiconSmallTile.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.387</Modified>
+      <Modified>2024-10-11T20:02:38.333</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-200.png">
       <PackagePath>appiconSmallTile.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.386</Modified>
+      <Modified>2024-10-11T20:02:38.333</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconSmallTile.scale-400.png">
       <PackagePath>appiconSmallTile.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.386</Modified>
+      <Modified>2024-10-11T20:02:38.333</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-100.png">
       <PackagePath>appiconStoreLogo.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.389</Modified>
+      <Modified>2024-10-11T20:02:38.336</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-125.png">
       <PackagePath>appiconStoreLogo.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.389</Modified>
+      <Modified>2024-10-11T20:02:38.336</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-150.png">
       <PackagePath>appiconStoreLogo.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.388</Modified>
+      <Modified>2024-10-11T20:02:38.336</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-200.png">
       <PackagePath>appiconStoreLogo.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.388</Modified>
+      <Modified>2024-10-11T20:02:38.335</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconStoreLogo.scale-400.png">
       <PackagePath>appiconStoreLogo.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.387</Modified>
+      <Modified>2024-10-11T20:02:38.335</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-100.png">
       <PackagePath>appiconWideTile.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.384</Modified>
+      <Modified>2024-10-11T20:02:38.330</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-125.png">
       <PackagePath>appiconWideTile.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.383</Modified>
+      <Modified>2024-10-11T20:02:38.329</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-150.png">
       <PackagePath>appiconWideTile.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.383</Modified>
+      <Modified>2024-10-11T20:02:38.328</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-200.png">
       <PackagePath>appiconWideTile.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.383</Modified>
+      <Modified>2024-10-11T20:02:38.328</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\appiconWideTile.scale-400.png">
       <PackagePath>appiconWideTile.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.382</Modified>
+      <Modified>2024-10-11T20:02:38.328</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-100.png">
       <PackagePath>dotnet_bot.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.401</Modified>
+      <Modified>2024-10-11T20:02:38.355</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-125.png">
       <PackagePath>dotnet_bot.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.400</Modified>
+      <Modified>2024-10-11T20:02:38.354</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-150.png">
       <PackagePath>dotnet_bot.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.400</Modified>
+      <Modified>2024-10-11T20:02:38.354</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-200.png">
       <PackagePath>dotnet_bot.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.399</Modified>
+      <Modified>2024-10-11T20:02:38.353</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\dotnet_bot.scale-400.png">
       <PackagePath>dotnet_bot.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.399</Modified>
+      <Modified>2024-10-11T20:02:38.353</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\profile_icon.scale-100.png">
       <PackagePath>profile_icon.scale-100.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.381</Modified>
+      <Modified>2024-10-11T20:02:38.324</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\profile_icon.scale-125.png">
       <PackagePath>profile_icon.scale-125.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.380</Modified>
+      <Modified>2024-10-11T20:02:38.324</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\profile_icon.scale-150.png">
       <PackagePath>profile_icon.scale-150.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.380</Modified>
+      <Modified>2024-10-11T20:02:38.323</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\profile_icon.scale-200.png">
       <PackagePath>profile_icon.scale-200.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.380</Modified>
+      <Modified>2024-10-11T20:02:38.323</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\resizetizer\r\profile_icon.scale-400.png">
       <PackagePath>profile_icon.scale-400.png</PackagePath>
-      <Modified>2024-10-03T19:03:02.379</Modified>
+      <Modified>2024-10-11T20:02:38.322</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-windows10.0.19041.0\win10-x64\OrganizetApplication.deps.json">
       <PackagePath>OrganizetApplication.deps.json</PackagePath>
-      <Modified>2024-10-07T14:43:43.870</Modified>
+      <Modified>2024-10-11T20:05:48.213</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Usuário\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.34\lib\net6.0\Microsoft.Windows.SDK.NET.dll">
+    <AppxPackagedFile Include="C:\Users\Usuário\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.44\lib\net8.0\Microsoft.Windows.SDK.NET.dll">
       <PackagePath>Microsoft.Windows.SDK.NET.dll</PackagePath>
-      <Modified>2024-07-08T09:23:38.000</Modified>
+      <Modified>2024-09-09T00:48:42.000</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Usuário\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.34\lib\net6.0\WinRT.Runtime.dll">
+    <AppxPackagedFile Include="C:\Users\Usuário\.nuget\packages\microsoft.windows.sdk.net.ref\10.0.19041.44\lib\net8.0\WinRT.Runtime.dll">
       <PackagePath>WinRT.Runtime.dll</PackagePath>
-      <Modified>2024-07-08T09:23:38.000</Modified>
+      <Modified>2024-09-09T00:48:40.000</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Usuário\.nuget\packages\microsoft.aspnetcore.authorization\8.0.0\lib\net8.0\Microsoft.AspNetCore.Authorization.dll">
       <PackagePath>Microsoft.AspNetCore.Authorization.dll</PackagePath>
@@ -847,7 +847,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\Domain\bin\Debug\net8.0\Domain.dll">
       <PackagePath>Domain.dll</PackagePath>
-      <Modified>2024-10-04T17:53:04.021</Modified>
+      <Modified>2024-10-11T20:02:10.092</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Usuário\.nuget\packages\microsoft.maui.controls.compatibility\8.0.91\lib\net8.0-windows10.0.19041\Microsoft.Maui.Controls.Compatibility.pri">
       <PackagePath>Microsoft.Maui.Controls.Compatibility.pri</PackagePath>
@@ -863,11 +863,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\scopedcss\bundle\OrganizetApplication.styles.css">
       <PackagePath>wwwroot\OrganizetApplication.styles.css</PackagePath>
-      <Modified>2024-10-03T19:02:39.524</Modified>
+      <Modified>2024-10-11T20:02:19.903</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-windows10.0.19041.0\win10-x64\scopedcss\projectbundle\OrganizetApplication.bundle.scp.css">
       <PackagePath>wwwroot\OrganizetApplication.bundle.scp.css</PackagePath>
-      <Modified>2024-10-03T19:02:39.526</Modified>
+      <Modified>2024-10-11T20:02:19.913</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\Nova pasta\OrganizetApplication\Components\Layout\MainLayout.razor.css">
       <PackagePath>Components\Layout\MainLayout.razor.css</PackagePath>

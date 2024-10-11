@@ -1,8 +1,6 @@
 ﻿@using System.Diagnostics
 @using Domain.Entities
 @using Microsoft.Extensions.Logging
-@using OrganizetApplication.Services
-@using Microsoft.AspNetCore.SignalR.Client
 @using System.Diagnostics.Tracing
 @inject NavigationManager Navigation
 @inject HttpClient httpClient
@@ -91,32 +89,24 @@
     private List<string> items = new List<string> {" ","Para Mim", "Em Grupo" };
     private string selectedItem;
     private bool taskCreated = false;
-    private string notificationMessage;
-    private bool showNotificator = false;    
+    private string notificationMessage;      
     private IEnumerable<Sector> sectors = new List<Sector>();
     [Inject] private ILogger<PopupForm> _logger { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
-        titlePage = "Criar Tarefa";
+        titlePage = "Criar Tarefa";        
         await LoadSectors();
     }
 
     private async Task HandleSubmit()
-    {
-
+    {        
         await ClosePopup(); // Fechar o popup após o envio
-    }
-
-    private void CloseNotificator()
-    {
-        showNotificator = false;
     }
 
     private async Task SubmitForm()
     {
-        isLoading = true; // Inicia o carregamento (exibe o spinner)
-        taskCreated = false; // Garante que a mensagem de sucesso não apareça ainda
+        isLoading = true; // Inicia o carregamento (exibe o spinner)        
         titlePage = "";
         StateHasChanged(); // Força a atualização da interface
 
@@ -124,16 +114,14 @@
         {
             if (selectedItem == "Em Grupo")
             {
-                await PostNewTaskForMany(taskForMany);
+                await PostNewTaskForMany(taskForMany);                
             }
             else if (selectedItem == "Para Mim")
             {
                 taskForUser.Title = taskForMany.Title;
-                await PostNewTaskForUser(taskForUser);                
-            }
+                await PostNewTaskForUser(taskForUser);               
+            }           
 
-            taskCreated = true;
-            
         }
         catch (Exception ex)
         {
@@ -142,22 +130,13 @@
         }
         finally
         {
-            await Task.Delay(1000); // Simulação de tempo para o spinner
-            isLoading = false; // Finaliza o carregamento (oculta o spinner)
-             // Atualiza a interface para refletir o novo estado
+            await Task.Delay(2000); // Simulação de tempo para o spinner
+            isLoading = false; // Finaliza o carregamento (oculta o spinner)             
 
-            if (taskCreated)
-            {
-                // Exibe a mensagem de sucesso por alguns segundos
-                await Task.Delay(1000); // Aguarda mais 2 segundos para a mensagem
-            }
-
-            await ClosePopup();
-            StateHasChanged();            
+            await ClosePopup();                       
         }
+        StateHasChanged();
     }
-
-
 
     public async Task PostNewTaskForMany(TaskForMany taskForMany)
     {
@@ -179,7 +158,9 @@
 
                     // Postar setores relacionados
                     await PostTaskForManySectors(taskForMany, selectedItems);
-                    titlePage = "Criando Tarefa";                    
+                    taskCreated = true;
+                    titlePage = "Criando Tarefa";
+                    notificationMessage = "Tarefa criada com sucesso!";
                 }
                 else
                 {
@@ -198,8 +179,6 @@
         }
     }
 
-
-
     private async Task PostTaskForManySectors(TaskForMany taskForMany, List<int> selectedItems)
     {
         if (taskForMany == null)
@@ -208,32 +187,10 @@
             return;
         }
 
-        // Conectar-se ao endpoint de notificações SSE
-        var cts = new CancellationTokenSource();
+       
         try
         {
-            using var sseResponse = await httpClient.GetAsync("Notifications/events", HttpCompletionOption.ResponseHeadersRead, cts.Token);
-            sseResponse.EnsureSuccessStatusCode();
-
-            using var stream = await sseResponse.Content.ReadAsStreamAsync();
-            using var reader = new StreamReader(stream);
-
-            // Iniciar a leitura do stream em uma tarefa separada
-            _ = Task.Run(async () =>
-            {
-                while (!cts.Token.IsCancellationRequested)
-                {
-                    var line = await reader.ReadLineAsync();
-                    if (line != null && line.StartsWith("data: "))
-                    {
-                        // Extraia a mensagem da linha
-                        notificationMessage = $"{line.Substring("data: ".Length)}";
-                        // Aqui você pode armazenar ou processar a mensagem conforme necessário
-                        Debug.WriteLine($"Notificação recebida: {notificationMessage}");
-                    }
-                }
-            });
-
+            
             foreach (int item in selectedItems)
             {
                 try
@@ -259,17 +216,13 @@
                     _logger.LogInformation($"Erro ao associar o setor {item}: {ex.Message}");
                 }
             }
+            taskCreated = true;
         }
         catch (Exception ex)
         {
             _logger.LogInformation($"Erro ao se conectar ao endpoint SSE: {ex.Message}");
         }
-        finally
-        {
-            // Cancela a tarefa de leitura quando o método é finalizado
-            cts.Cancel();
-            cts.Dispose();
-        }
+        
     }
 
 
@@ -287,6 +240,7 @@
             if (response.IsSuccessStatusCode)
             {                
                 Debug.WriteLine($"{response.IsSuccessStatusCode}");
+                notificationMessage = "Tarefa criada com sucesso!";
                 StateHasChanged();
             }
 
@@ -327,7 +281,7 @@
             throw new Exception("Failed to load task");
         }        
     }
-
+    
     public async Task<IEnumerable<TaskForMany>> LoadTaskForManySectorById(int id)
     {
         var taskForManyById = await httpClient.GetFromJsonAsync<IEnumerable<TaskForMany>>($"TaskForManysector/GetTaskForManySectorById?idTask={id}");

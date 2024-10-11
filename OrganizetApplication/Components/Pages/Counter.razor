@@ -1,13 +1,40 @@
 ﻿@page "/counter"
+@using Domain.Entities
+@inject HttpClient httpClient
+<h1>@NotificationCount</h1>
 
-<h1>Counter</h1>
-
-<input type="text" disabled value="Lucas Feitosa de Lima"/>
+@if (Notifications == null)
+{
+    <div class="loading-spinner-container">
+        <div class="loading-spinner"></div>
+    </div>
+}
+else
+{
+    <div style="align-items:initial"> 
+      
+            @foreach (var notificantion in Notifications)
+            {
+                <div style="margin: 10px;align-content:initial;background-color:lightblue">                    
+                    <p>@notificantion.Message</p>                                          
+                </div>
+            }
+         
+     </div>
+}
 @code {
-    private int currentCount = 0;
+    private IEnumerable<Notification> Notifications;
+    private string NotificationCount;
 
-    private void IncrementCount()
+    protected override async Task OnInitializedAsync()
     {
-        currentCount++;
+        await LoadNotificationsBySectorId(1);
+    }
+    private async Task LoadNotificationsBySectorId(int sectorId)
+    {
+        var response = await httpClient.GetFromJsonAsync<IEnumerable<Notification>>($"Notifications/GetNotificationsBySectorId?sectorId={sectorId}");
+        if (response != null)
+            Notifications = response;
+            NotificationCount = $"Notificações ({response.Count()})";
     }
 }

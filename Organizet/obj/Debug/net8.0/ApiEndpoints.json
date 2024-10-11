@@ -55,6 +55,22 @@
   },
   {
     "ContainingType": "Organizet.Controllers.NotificationsController",
+    "Method": "GetNotificationsBySectorId",
+    "RelativePath": "api/Notifications/GetNotificationsBySectorId",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "sectorId",
+        "Type": "System.Int32",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "Organizet.Controllers.NotificationsController",
     "Method": "PutNotificationById",
     "RelativePath": "api/Notifications/PutNotificationById",
     "HttpMethod": "PUT",

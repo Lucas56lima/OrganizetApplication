@@ -54,5 +54,14 @@ namespace Service.Services
 
             return await _repository.PutNotification(id,newNotification);
         }
+
+        public async Task<IEnumerable<Notification>> GetNotificationsBySectorId(int sectorId)
+        {
+            var notifications = await _repository.GetNotificationsBySectorId(sectorId);
+            if(notifications == null)
+                return Enumerable.Empty<Notification>();
+
+            return notifications;
+        }
     }
 }

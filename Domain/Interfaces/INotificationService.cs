@@ -8,5 +8,6 @@ namespace Domain.Interfaces
         Task<Notification> GetNotificationById(int id);
         Task<Notification> GetNotificationBySectorId(int sectorId);
         Task<Notification> PutNotification(int id,Notification notification);
+        Task<IEnumerable<Notification>> GetNotificationsBySectorId(int sectorId);
     }
 }

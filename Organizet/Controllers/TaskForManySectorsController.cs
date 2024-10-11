@@ -8,28 +8,16 @@ namespace Organizet.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class TaskForManySectorsController : Controller
+    public class TaskForManySectorsController (ITaskForManySectorService service, INotificationService notificationService) : Controller
     {
-        private readonly ITaskForManySectorService _service;
-        private readonly INotificationService _notificationService;
-        private readonly IHubContext<SendNotification> _notificationHub;        
-
-        // Construtor tradicional para injeção de dependência
-        public TaskForManySectorsController(ITaskForManySectorService service,
-                                            INotificationService notificationService,
-                                            IHubContext<SendNotification> notificationHub)                                        
-        {
-            _service = service;
-            _notificationService = notificationService;
-            _notificationHub = notificationHub;
-        }
-
+        private readonly ITaskForManySectorService _service = service;
+        private readonly INotificationService _notificationService = notificationService;          
+        
         [HttpPost("RegisterNewTaskForManySector")]
         public async Task<IActionResult> PostTaskForManySector([FromBody] TaskForManySector taskForManySector)
         {
             var result = await _service.PostTaskForManySector(taskForManySector);
-            var message = $"Nota tarefa em grupo criada Id:{taskForManySector.TaskId}";
-            await NotificationsController.SendNotification(taskForManySector.SectorId,message);
+            var message = $"Nota tarefa em grupo criada Id:{taskForManySector.TaskId}";           
             var notification = new Notification
             {
                 SectorId = result.SectorId,

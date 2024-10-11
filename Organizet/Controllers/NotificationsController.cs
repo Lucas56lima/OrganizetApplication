@@ -53,6 +53,11 @@ namespace Organizet.Controllers
         {
             return Ok(await _notificationService.GetNotificationBySectorId(sectorId));
         }
+        [HttpGet("GetNotificationsBySectorId")]
+        public async Task<IActionResult> GetNotificationsBySectorId(int sectorId)
+        {
+            return Ok(await _notificationService.GetNotificationsBySectorId(sectorId));
+        }
 
         [HttpPut("PutNotificationById")]
         public async Task<IActionResult> PutNotificationById(int id, Notification notification)

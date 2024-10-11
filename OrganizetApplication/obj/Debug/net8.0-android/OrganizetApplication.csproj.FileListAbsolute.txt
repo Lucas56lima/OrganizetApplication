@@ -1053,6 +1053,16 @@ C:\Users\Usuário\source\repos\Organizet\OrganizetApplication\obj\Debug\net8.0-a
 C:\Users\Usuário\source\repos\Organizet\OrganizetApplication\obj\Debug\net8.0-android\android\src\mono\MonoPackageManager_Resources.java
 C:\Users\Usuário\source\repos\Organizet\OrganizetApplication\obj\Debug\net8.0-android\android\typemaps.x86_64.ll
 C:\Users\Usuário\source\repos\Organizet\OrganizetApplication\obj\Debug\net8.0-android\android\environment.x86_64.ll
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\OrganizetApplication.runtimeconfig.json
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\OrganizetApplication.dll
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\OrganizetApplication.pdb
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication.apk
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication.aab
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication-Signed.aab
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication-Signed.apk
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication-Signed.apk.idsig
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\Domain.dll
+C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\Domain.pdb
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\build.props
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\adb.props
@@ -1185,16 +1195,6 @@ C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\OrganizetAppli
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\OrganizetApplication.AssemblyInfo.cs
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\OrganizetApplication.csproj.CoreCompileInputs.cache
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\OrganizetApplication.sourcelink.json
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\OrganizetApplication.runtimeconfig.json
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\OrganizetApplication.dll
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\OrganizetApplication.pdb
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication.apk
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication.aab
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication-Signed.aab
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication-Signed.apk
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\com.companyname.organizetapplication-Signed.apk.idsig
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\Domain.dll
-C:\Users\Nova pasta\OrganizetApplication\bin\Debug\net8.0-android\Domain.pdb
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\XamlC.stamp
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\Organize.B4EAD0DC.Up2Date
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\OrganizetApplication.dll
@@ -1318,6 +1318,7 @@ C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\OrganizetApplication.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\OrganizetApplication.pdb
+C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\Pipelines.Sockets.Unofficial.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\pl\Microsoft.Maui.Controls.resources.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\pt-BR\Microsoft.Maui.Controls.resources.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\pt\Microsoft.Maui.Controls.resources.dll
@@ -1329,6 +1330,7 @@ C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\SQLitePCLRaw.core.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\SQLitePCLRaw.lib.e_sqlcipher.android.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\SQLitePCLRaw.provider.e_sqlcipher.dll
+C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\StackExchange.Redis.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\sv\Microsoft.Maui.Controls.resources.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\System.AppContext.dll
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\System.Buffers.dll
@@ -2209,5 +2211,3 @@ C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\stamp\_Convert
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\stamp\_GenerateJavaStubs.stamp
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\stamp\_GeneratePackageManagerJava.stamp
 C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\stamp\_ResolveLibraryProjectImports.stamp
-C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\Pipelines.Sockets.Unofficial.dll
-C:\Users\Nova pasta\OrganizetApplication\obj\Debug\net8.0-android\android\assets\StackExchange.Redis.dll

@@ -2,8 +2,6 @@
 @using Domain.Entities
 @using Domain.Models
 @using System.Collections.Concurrent
-@using Microsoft.AspNetCore.SignalR.Client
-@using OrganizetApplication.Services
 @using static CacheService
 @inherits LayoutComponentBase
 @inject NavigationManager Navigation
@@ -187,8 +185,9 @@ else
     private bool isFirstPageForMany => currentPageForMany == 1;
     private bool isLastPageForMany => currentPageForMany == totalPagesForMany;
     private int? isEditingTaskId = null;
-    private int? isEditingTaskForManyId = null;   
-    
+    private int? isEditingTaskForManyId = null;
+    private bool stopListening = false;
+
     private void OpenPopup()
     {        
         showPopup = true;
@@ -249,15 +248,18 @@ else
         popupForm = popup;
     }
 
-    private void ClosePopup(bool isVisible)
+    private async Task ClosePopup(bool isVisible)
     {
         showPopup = isVisible;
+        await LoadTasksForUsers();
+        await LoadTasksForMany(1);       
     }
 
     protected override async Task OnInitializedAsync()
-    {        
+    {
         await LoadTasksForUsers();
         await LoadTasksForMany(1);
+        // await StartListeningTasks();
     }
 
     private async Task LoadTasksForUsers()
@@ -278,9 +280,26 @@ else
         {
             Console.WriteLine($"Erro ao fazer GET: {ex.Message}");
             tasks = Enumerable.Empty<TaskViewModel>();
-        }
+        }        
     }
 
+    private async Task StartListeningTasks()
+    {
+        while(!stopListening)
+        {
+            try
+            {
+                await LoadTasksForMany(1);
+                await LoadTasksForUsers();
+            }
+            catch(Exception ex)
+            {
+                throw new Exception("Erro ao atualizar página", ex);
+            }
+            await Task.Delay(5000);
+        }      
+
+    }
     private async Task LoadTasksForMany(int sectorId)
     {
         try
@@ -295,8 +314,8 @@ else
             }
 
             tasksForMany = await httpClient.GetFromJsonAsync<IEnumerable<TaskViewModel>>($"TaskForManySectors/GetAllTasksForManySector?sectorId={sectorId}");            
-            TaskForManyCount = $"Tarefas em Grupo ({tasksForMany.Count()})";            
-
+            TaskForManyCount = $"Tarefas em Grupo ({tasksForMany.Count()})";
+           
             _cache.AddOrUpdateCache(cacheKey, new CacheItem<IEnumerable<TaskViewModel>>
                 {
                     Data = tasksForMany,
@@ -307,7 +326,8 @@ else
         {
             Console.WriteLine($"Erro ao fazer GET: {ex.Message}");            
             tasksForMany = Enumerable.Empty<TaskViewModel>();
-        } 
+        }        
+        
     }
 
     public IEnumerable<TaskViewModel> FilterDataFromCache(int taskId, Func<TaskViewModel, bool> filterPredicate = null)

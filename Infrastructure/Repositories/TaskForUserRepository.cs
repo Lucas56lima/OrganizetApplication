@@ -64,7 +64,7 @@ namespace Infrastructure.Repositories
                                 Status = status.Name
                             })
                             .Where(u => u.Status != "Concluído")
-                            .OrderByDescending(x => x.CreateDate)
+                            .OrderByDescending(x => x.Id)
                             .ToListAsync();
 
             }
@@ -95,7 +95,7 @@ namespace Infrastructure.Repositories
                                 Status = status.Name
                             })
                             .Where(u => u.Status == "Concluído" && u.CreateDate >= initalDate && u.CreateDate <= endDate)
-                            .OrderByDescending(x => x.CreateDate)
+                            .OrderByDescending(x => x.Id)
                             .ToListAsync();
 
             }
@@ -112,7 +112,7 @@ namespace Infrastructure.Repositories
                 await _context.TasksForUsers.AddAsync(taskforUser);
                 await _context.SaveChangesAsync();
 
-                TaskForUser newTaskForUser = new TaskForUser
+                TaskForUserBackUp newTaskForUser = new()
                 {                    
                     Title = taskforUser.Title,
                     Description = taskforUser.Description,
@@ -121,10 +121,9 @@ namespace Infrastructure.Repositories
                     SectorId = taskforUser.SectorId,
                     Status = taskforUser.Status,
                     IsActive = true
-                };
-                //TaskForUserBackUp newTaskForUser
-                //await _contextServer.TasksForUsers.AddAsync(newTaskForUser);
-                //await _contextServer.SaveChangesAsync();
+                };                
+                await _contextServer.TasksForUsers.AddAsync(newTaskForUser);
+                await _contextServer.SaveChangesAsync();
                 return taskforUser;
             }
             catch (Exception ex)

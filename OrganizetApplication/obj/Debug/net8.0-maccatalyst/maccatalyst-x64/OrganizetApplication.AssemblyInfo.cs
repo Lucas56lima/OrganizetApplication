@@ -18,7 +18,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyProductAttribute("OrganizetApplication")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrganizetApplication")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
-[assembly: System.Runtime.Versioning.TargetPlatformAttribute("MacCatalyst17.5")]
+[assembly: System.Runtime.Versioning.TargetPlatformAttribute("MacCatalyst18.0")]
 [assembly: System.Runtime.Versioning.SupportedOSPlatformAttribute("MacCatalyst14.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
