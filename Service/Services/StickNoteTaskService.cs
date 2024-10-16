@@ -43,13 +43,14 @@ namespace Service.Services
            return await _repository.GetStickNoteTaskForStatusAndSector(taskId,status,sectorId);
         }
 
-        public Task<StickNoteTaskForMany> PostStickNoteTask(StickNoteTaskForMany stickNoteTask)
+        public async Task<StickNoteTaskForMany> PostStickNoteTask(StickNoteTaskForMany stickNoteTask)
         {
             if (stickNoteTask == null)
             {
                 return null;
             }
-            return _repository.PostStickNoteTask(stickNoteTask);
+            
+            return await _repository.PostStickNoteTask(stickNoteTask);
         }
 
         public Task<StickNoteTaskForUserBackUp> PostStickNoteTaskForUser(StickNoteTaskForUserBackUp stickNoteTaskForUser)
@@ -65,7 +66,10 @@ namespace Service.Services
                 if (stickNoteTaskDb == null) return null;
                 newStickNote.Id = stickNoteTaskDb.Id;
                 newStickNote.TaskId = stickNoteTaskDb.TaskId;
-                newStickNote.SectorId = stickNoteTaskDb.SectorId;                
+                newStickNote.SectorId = stickNoteTaskDb.SectorId;
+                newStickNote.CreateDate = stickNoteTaskDb.CreateDate;
+                newStickNote.CreateUserId = stickNoteTaskDb.CreateUserId;
+
                 return await _repository.PutStickNoteById(id, newStickNote);
             }
             catch

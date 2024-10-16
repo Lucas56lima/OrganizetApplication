@@ -119,7 +119,7 @@ namespace Infrastructure.Repositories
         {
             try
             {
-                return await _context.SticksNotesTasksForMany
+                return await _contextServer.SticksNotesTasksForMany
                             .Where(u => u.IsActive == true && u.TaskId == taskId && u.Status == status && u.SectorId == sectorId)
                             .ToListAsync();
 
@@ -164,11 +164,11 @@ namespace Infrastructure.Repositories
             try
             { 
                 var stickNoteTaskDb = await GetStickNoteById(id);
-                _context.Entry(stickNoteTaskDb).CurrentValues.SetValues(newStickNote);
-                _context.Entry(stickNoteTaskDb).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                _contextServer.Entry(stickNoteTaskDb).CurrentValues.SetValues(newStickNote);
+                //_context.Entry(stickNoteTaskDb).State = EntityState.Modified;
+                //await _context.SaveChangesAsync();
                 _contextServer.Entry(stickNoteTaskDb).State = EntityState.Modified;
-                await _context.SaveChangesAsync();
+                //await _context.SaveChangesAsync();
                 await _contextServer.SaveChangesAsync();
                 return stickNoteTaskDb;
             }
